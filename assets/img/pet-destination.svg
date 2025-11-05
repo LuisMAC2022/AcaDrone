@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-labelledby="title desc">
+  <title id="title">Destino del PET</title>
+  <desc id="desc">Ilustración abstracta de rutas y nodos que simboliza el recorrido del PET.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e0ecff"/>
+      <stop offset="100%" stop-color="#fdf2ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="240" fill="url(#bg)" rx="24"/>
+  <g fill="none" stroke="#0c6cf2" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M60 180 C 120 140, 200 140, 260 100"/>
+    <path d="M60 140 C 140 100, 200 120, 260 60" opacity="0.6"/>
+  </g>
+  <g fill="#0c6cf2">
+    <circle cx="60" cy="180" r="14"/>
+    <circle cx="140" cy="140" r="10" opacity="0.8"/>
+    <circle cx="200" cy="130" r="10" opacity="0.6"/>
+    <circle cx="260" cy="100" r="16"/>
+  </g>
+</svg>
