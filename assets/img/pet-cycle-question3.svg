@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img" aria-labelledby="title desc">
+  <title id="title">Acción individual</title>
+  <desc id="desc">Manos sosteniendo un dron y un contenedor de reciclaje</desc>
+  <rect width="240" height="180" rx="16" fill="#4fd1c5" opacity="0.15" />
+  <g fill="#0c6cf2" stroke="#0c6cf2" stroke-linejoin="round" stroke-width="4">
+    <path d="M60 110c20 16 36 24 60 24s40-8 60-24" fill="#ffffff" />
+    <rect x="96" y="52" width="48" height="24" rx="6" fill="#0c6cf2" />
+    <path d="M96 64h-16l-16 24" fill="none" />
+    <path d="M144 64h16l16 24" fill="none" />
+    <rect x="108" y="80" width="24" height="28" rx="6" fill="#ffffff" />
+  </g>
+  <g fill="#1f2933" opacity="0.75">
+    <rect x="44" y="104" width="20" height="28" rx="6" />
+    <rect x="176" y="104" width="20" height="28" rx="6" />
+  </g>
+</svg>

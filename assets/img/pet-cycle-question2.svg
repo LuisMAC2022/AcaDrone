@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img" aria-labelledby="title desc">
+  <title id="title">Destino del PET</title>
+  <desc id="desc">Icono de mapa urbano con marcadores de ruta</desc>
+  <rect width="240" height="180" rx="16" fill="#0c6cf2" opacity="0.12" />
+  <path d="M40 140c24-56 60-84 104-84 20 0 38 6 56 18" fill="none" stroke="#0c6cf2" stroke-width="10" stroke-linecap="round" />
+  <g fill="#0c6cf2">
+    <circle cx="72" cy="108" r="14" />
+    <circle cx="128" cy="92" r="14" />
+    <circle cx="192" cy="88" r="14" />
+  </g>
+  <g fill="#1f2933" opacity="0.85">
+    <path d="M72 108l-6 18h12z" />
+    <path d="M128 92l-6 18h12z" />
+    <path d="M192 88l-6 18h12z" />
+  </g>
+</svg>

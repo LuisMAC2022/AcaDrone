@@ -66,6 +66,7 @@ Sin dependencias externas. Solo HTML/CSS/JS puro.
 
 ## Cambios recientes
 
+- La carta de presentación ahora muestra las preguntas clave en un mosaico visual 2x3 con ilustraciones para reforzar el mensaje.
 - Se añadió navegación secuencial que muestra una sola sección del informe a la vez, con botones de avance y retroceso para mejorar el enfoque del lector.
 - La carta de presentación ahora plantea tres preguntas de alto impacto emocional para subrayar el destino del PET y motivar la acción inmediata del lector.
 
@@ -73,6 +74,7 @@ Sin dependencias externas. Solo HTML/CSS/JS puro.
 
 - Incorporar un modo de presentación automática que avance por las secciones tras un intervalo configurable, ideal para exhibiciones sin intervención del usuario.
 - Diseñar un recorrido interactivo que narre el trayecto del PET desde la captura hasta la manufactura, integrando métricas en tiempo real y testimonios visuales.
+- Desplegar un comparador de escenarios donde cada mosaico incluya métricas cuantitativas y fotografías reales de los puntos de acopio.
 
 
 Estructura de carpetas

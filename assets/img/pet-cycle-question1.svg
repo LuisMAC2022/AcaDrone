@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img" aria-labelledby="title desc">
+  <title id="title">Generación diaria de PET</title>
+  <desc id="desc">Icono abstracto con botellas y flechas circulares</desc>
+  <defs>
+    <linearGradient id="grad1" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c6cf2" />
+      <stop offset="100%" stop-color="#4fd1c5" />
+    </linearGradient>
+  </defs>
+  <rect width="240" height="180" rx="16" fill="#f1f5f9" />
+  <g stroke="url(#grad1)" stroke-width="8" fill="none" stroke-linecap="round">
+    <path d="M120 38c32 0 58 26 58 58" />
+    <path d="M120 142c-32 0-58-26-58-58" />
+    <polyline points="178,96 188,124 210,104" />
+    <polyline points="62,84 52,56 30,76" />
+  </g>
+  <g fill="#0c6cf2" opacity="0.85">
+    <rect x="88" y="56" width="24" height="60" rx="10" />
+    <rect x="120" y="60" width="24" height="64" rx="10" />
+  </g>
+</svg>
