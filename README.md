@@ -64,6 +64,14 @@ Gráfico de barras “Cadena de masa” con PET_gen, PET_rec, F.
 
 Sin dependencias externas. Solo HTML/CSS/JS puro.
 
+## Cambios recientes
+
+- Se añadió navegación secuencial que muestra una sola sección del informe a la vez, con botones de avance y retroceso para mejorar el enfoque del lector.
+
+## Propuestas de desarrollo
+
+- Incorporar un modo de presentación automática que avance por las secciones tras un intervalo configurable, ideal para exhibiciones sin intervención del usuario.
+
 
 Estructura de carpetas
 
