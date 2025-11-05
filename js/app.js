@@ -185,29 +185,53 @@ function setupSectionNavigation() {
   const sections = Array.from(document.querySelectorAll('main > section'));
   const prevButton = document.getElementById('prevSection');
   const nextButton = document.getElementById('nextSection');
+  const expandButton = document.getElementById('expandSections');
   if (!sections.length || !prevButton || !nextButton) {
     return;
   }
 
   sections.forEach((section) => {
+    if (section.hasAttribute('hidden')) {
+      section.removeAttribute('hidden');
+    }
     if (!section.hasAttribute('tabindex')) {
       section.setAttribute('tabindex', '-1');
     }
   });
 
   const navLinks = Array.from(document.querySelectorAll('header nav a'));
-  let currentIndex = 0;
+  let activeIndex = 0;
+  let activeId = sections[0].id;
 
   const focusSection = (section) => {
     section.focus({ preventScroll: true });
+  };
+
+  const scrollToSection = (index) => {
+    if (index < 0 || index >= sections.length) {
+      return;
+    }
+    const section = sections[index];
+    focusSection(section);
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    updateUI(section.id);
+  };
+
+  const updateHash = (id) => {
+    if (window.location.hash.slice(1) === id) {
+      return;
+    }
+    if (typeof history.replaceState === 'function') {
+      history.replaceState(null, '', `#${id}`);
+    } else {
+      window.location.hash = `#${id}`;
+    }
   };
 
   const updateNavLinks = () => {
     navLinks.forEach((link) => {
       const targetId = link.getAttribute('href').slice(1);
-      const isActive = sections[currentIndex].id === targetId;
-      if (isActive) {
+      if (targetId === activeId) {
         link.setAttribute('aria-current', 'page');
       } else {
         link.removeAttribute('aria-current');
@@ -215,39 +239,110 @@ function setupSectionNavigation() {
     });
   };
 
-  const goTo = (index) => {
-    if (index < 0 || index >= sections.length) {
-      return;
-    }
-    currentIndex = index;
-    sections.forEach((section, idx) => {
-      const isActive = idx === currentIndex;
-      section.toggleAttribute('hidden', !isActive);
-    });
-    prevButton.disabled = currentIndex === 0;
-    nextButton.disabled = currentIndex === sections.length - 1;
-    updateNavLinks();
-    focusSection(sections[currentIndex]);
+  const updateButtons = () => {
+    prevButton.disabled = activeIndex === 0;
+    nextButton.disabled = activeIndex === sections.length - 1;
   };
 
+  const updateUI = (id, { syncHash = true } = {}) => {
+    const index = sections.findIndex((section) => section.id === id);
+    if (index === -1) {
+      return;
+    }
+    activeIndex = index;
+    activeId = id;
+    updateNavLinks();
+    updateButtons();
+    if (syncHash) {
+      updateHash(id);
+    }
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) => sections.indexOf(a.target) - sections.indexOf(b.target),
+          );
+        if (visible.length) {
+          const newId = visible[0].target.id;
+          if (newId !== activeId) {
+            updateUI(newId);
+          }
+        }
+      },
+      {
+        rootMargin: '-40% 0px -40% 0px',
+        threshold: 0.2,
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  } else {
+    const handleScroll = () => {
+      const reference = window.scrollY + window.innerHeight * 0.35;
+      let closestSection = sections[0];
+      let smallestDistance = Math.abs(closestSection.offsetTop - reference);
+
+      sections.forEach((section) => {
+        const distance = Math.abs(section.offsetTop - reference);
+        if (distance < smallestDistance) {
+          smallestDistance = distance;
+          closestSection = section;
+        }
+      });
+
+      if (closestSection && closestSection.id !== activeId) {
+        updateUI(closestSection.id);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+  }
+
   prevButton.addEventListener('click', () => {
-    goTo(currentIndex - 1);
+    scrollToSection(Math.max(0, activeIndex - 1));
   });
 
   nextButton.addEventListener('click', () => {
-    goTo(currentIndex + 1);
+    scrollToSection(Math.min(sections.length - 1, activeIndex + 1));
   });
 
-  navLinks.forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      const targetId = link.getAttribute('href').slice(1);
-      const targetIndex = sections.findIndex((section) => section.id === targetId);
-      if (targetIndex !== -1) {
-        goTo(targetIndex);
+  if (expandButton) {
+    expandButton.addEventListener('click', () => {
+      sections.forEach((section) => section.removeAttribute('hidden'));
+      expandButton.setAttribute('aria-pressed', 'true');
+      expandButton.disabled = true;
+      expandButton.textContent = 'Vista continua activada';
+      if (sections[activeIndex]) {
+        sections[activeIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
+  }
+
+  window.addEventListener('hashchange', () => {
+    const targetId = window.location.hash.slice(1);
+    if (!targetId) {
+      return;
+    }
+    const targetSection = sections.find((section) => section.id === targetId);
+    if (targetSection) {
+      focusSection(targetSection);
+    }
+    updateUI(targetId, { syncHash: false });
   });
 
-  goTo(0);
+  if (window.location.hash) {
+    const initialId = window.location.hash.slice(1);
+    if (sections.some((section) => section.id === initialId)) {
+      updateUI(initialId);
+    } else {
+      updateUI(activeId);
+    }
+  } else {
+    updateUI(activeId);
+  }
 }
