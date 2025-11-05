@@ -8,6 +8,10 @@
   --accent: #0c6cf2;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -177,6 +181,7 @@ footer {
 .section-controls {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1rem;
   padding: 0 var(--space) var(--space);
 }
