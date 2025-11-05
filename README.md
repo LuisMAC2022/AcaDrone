@@ -68,13 +68,11 @@ Sin dependencias externas. Solo HTML/CSS/JS puro.
 
 - Se añadió navegación secuencial que muestra una sola sección del informe a la vez, con botones de avance y retroceso para mejorar el enfoque del lector.
 - La carta de presentación ahora plantea tres preguntas de alto impacto emocional para subrayar el destino del PET y motivar la acción inmediata del lector.
-- La carta de presentación integra un mosaico visual 2x3 que alterna texto e ilustraciones para reforzar cada pregunta con una imagen descriptiva.
 
 ## Propuestas de desarrollo
 
 - Incorporar un modo de presentación automática que avance por las secciones tras un intervalo configurable, ideal para exhibiciones sin intervención del usuario.
 - Diseñar un recorrido interactivo que narre el trayecto del PET desde la captura hasta la manufactura, integrando métricas en tiempo real y testimonios visuales.
-- Desarrollar un módulo de historias de impacto que combine narrativas breves, imágenes y métricas para destacar logros semanales del programa de reciclaje.
 
 
 Estructura de carpetas
