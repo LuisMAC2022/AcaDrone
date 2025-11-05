@@ -66,7 +66,8 @@ Sin dependencias externas. Solo HTML/CSS/JS puro.
 
 ## Cambios recientes
 
-- Se añadió navegación secuencial que muestra una sola sección del informe a la vez, con botones de avance y retroceso para mejorar el enfoque del lector.
+- La navegación ahora mantiene todas las secciones visibles por defecto, añade un modo guiado opcional y sincroniza los anclajes para conservar la experiencia de lectura continua incluso sin JavaScript.
+- El modo guiado paso a paso conserva los botones de avance y retroceso para quienes prefieren revisar una sección a la vez.
 - La carta de presentación ahora presenta las tres preguntas clave en un mosaico visual 2x3 con imágenes ilustrativas accesibles que alternan la posición del texto para reforzar la narrativa.
 - Se documentó un análisis profundo de usabilidad en `docs/usabilidad.md`, incluyendo prioridades de mejora y próximos pasos sugeridos.
 
@@ -76,6 +77,7 @@ Sin dependencias externas. Solo HTML/CSS/JS puro.
 - Diseñar un recorrido interactivo que narre el trayecto del PET desde la captura hasta la manufactura, integrando métricas en tiempo real y testimonios visuales.
 - Agregar un módulo multimedia que permita insertar clips cortos sobre puntos de acopio y testimonios estudiantiles, optimizado para carga progresiva y subtítulos accesibles.
 - Implementar un centro de ayuda contextual en el formulario que ofrezca glosarios, ejemplos de parámetros y enlaces a documentación para reducir errores de captura.
+- Diseñar un sumario lateral pegajoso que muestre el progreso de lectura y permita saltar entre secciones con indicaciones visuales de estado.
 
 
 Estructura de carpetas
