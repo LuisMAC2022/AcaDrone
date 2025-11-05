@@ -19,6 +19,10 @@ body {
   color: #1f2933;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 header {
   background: #ffffff;
   border-bottom: 1px solid var(--border-color);
@@ -42,6 +46,11 @@ header nav a {
   text-decoration: none;
   color: var(--accent);
   font-weight: 600;
+}
+
+header nav a[aria-current="page"] {
+  text-decoration: underline;
+  color: #1f2933;
 }
 
 main {
@@ -197,6 +206,11 @@ footer {
   background: var(--accent);
   color: #ffffff;
   outline: none;
+}
+
+.section-controls button[aria-pressed="true"] {
+  background: #0c6cf2;
+  color: #ffffff;
 }
 
 .section-controls button:disabled {

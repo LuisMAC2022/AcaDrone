@@ -185,7 +185,8 @@ function setupSectionNavigation() {
   const sections = Array.from(document.querySelectorAll('main > section'));
   const prevButton = document.getElementById('prevSection');
   const nextButton = document.getElementById('nextSection');
-  if (!sections.length || !prevButton || !nextButton) {
+  const toggleButton = document.getElementById('toggleSectionMode');
+  if (!sections.length || !prevButton || !nextButton || !toggleButton) {
     return;
   }
 
@@ -197,10 +198,14 @@ function setupSectionNavigation() {
 
   const navLinks = Array.from(document.querySelectorAll('header nav a'));
   let currentIndex = 0;
+  let guidedMode = false;
 
-  const focusSection = (section) => {
+  const focusSection = (section, { smooth = true } = {}) => {
     section.focus({ preventScroll: true });
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    section.scrollIntoView({
+      behavior: smooth ? 'smooth' : 'auto',
+      block: 'start',
+    });
   };
 
   const updateNavLinks = () => {
@@ -215,39 +220,97 @@ function setupSectionNavigation() {
     });
   };
 
-  const goTo = (index) => {
+  const applyGuidedVisibility = () => {
+    sections.forEach((section, index) => {
+      const shouldHide = guidedMode && index !== currentIndex;
+      if (shouldHide) {
+        section.setAttribute('hidden', '');
+      } else {
+        section.removeAttribute('hidden');
+      }
+    });
+    prevButton.disabled = guidedMode && currentIndex === 0;
+    nextButton.disabled = guidedMode && currentIndex === sections.length - 1;
+  };
+
+  const setHash = (id) => {
+    const newHash = `#${id}`;
+    if (newHash === window.location.hash) {
+      return;
+    }
+    if (typeof history.replaceState === 'function') {
+      history.replaceState(null, '', newHash);
+    } else {
+      window.location.hash = newHash;
+    }
+  };
+
+  const goTo = (index, { updateHash = true, smooth = true } = {}) => {
     if (index < 0 || index >= sections.length) {
       return;
     }
     currentIndex = index;
-    sections.forEach((section, idx) => {
-      const isActive = idx === currentIndex;
-      section.toggleAttribute('hidden', !isActive);
-    });
-    prevButton.disabled = currentIndex === 0;
-    nextButton.disabled = currentIndex === sections.length - 1;
+    if (updateHash) {
+      setHash(sections[currentIndex].id);
+    }
     updateNavLinks();
-    focusSection(sections[currentIndex]);
+    applyGuidedVisibility();
+    focusSection(sections[currentIndex], { smooth });
+  };
+
+  const findIndexById = (id) => sections.findIndex((section) => section.id === id);
+
+  const syncFromHash = ({ smooth = false } = {}) => {
+    const targetId = window.location.hash.slice(1);
+    const targetIndex = findIndexById(targetId);
+    if (targetIndex !== -1) {
+      goTo(targetIndex, { updateHash: false, smooth });
+    }
   };
 
   prevButton.addEventListener('click', () => {
-    goTo(currentIndex - 1);
+    const targetIndex = Math.max(0, currentIndex - 1);
+    if (targetIndex !== currentIndex) {
+      goTo(targetIndex);
+    }
   });
 
   nextButton.addEventListener('click', () => {
-    goTo(currentIndex + 1);
+    const targetIndex = Math.min(sections.length - 1, currentIndex + 1);
+    if (targetIndex !== currentIndex) {
+      goTo(targetIndex);
+    }
+  });
+
+  toggleButton.addEventListener('click', () => {
+    guidedMode = !guidedMode;
+    toggleButton.setAttribute('aria-pressed', guidedMode.toString());
+    toggleButton.textContent = guidedMode ? 'Expandir todo' : 'Activar modo guiado';
+    applyGuidedVisibility();
+    if (guidedMode) {
+      focusSection(sections[currentIndex], { smooth: false });
+    }
   });
 
   navLinks.forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
+    link.addEventListener('click', () => {
       const targetId = link.getAttribute('href').slice(1);
-      const targetIndex = sections.findIndex((section) => section.id === targetId);
+      const targetIndex = findIndexById(targetId);
       if (targetIndex !== -1) {
-        goTo(targetIndex);
+        currentIndex = targetIndex;
+        updateNavLinks();
+        applyGuidedVisibility();
       }
     });
   });
 
-  goTo(0);
+  window.addEventListener('hashchange', () => {
+    syncFromHash({ smooth: true });
+  });
+
+  if (window.location.hash) {
+    syncFromHash();
+  } else {
+    goTo(0, { updateHash: false, smooth: false });
+  }
 }
