@@ -156,6 +156,8 @@ function bind() {
     }
   });
 
+  setupSectionNavigation();
+
   fetch('data/defaults.json')
     .then((response) => {
       if (!response.ok) {
@@ -177,4 +179,75 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', bind);
 } else {
   bind();
+}
+
+function setupSectionNavigation() {
+  const sections = Array.from(document.querySelectorAll('main > section'));
+  const prevButton = document.getElementById('prevSection');
+  const nextButton = document.getElementById('nextSection');
+  if (!sections.length || !prevButton || !nextButton) {
+    return;
+  }
+
+  sections.forEach((section) => {
+    if (!section.hasAttribute('tabindex')) {
+      section.setAttribute('tabindex', '-1');
+    }
+  });
+
+  const navLinks = Array.from(document.querySelectorAll('header nav a'));
+  let currentIndex = 0;
+
+  const focusSection = (section) => {
+    section.focus({ preventScroll: true });
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const updateNavLinks = () => {
+    navLinks.forEach((link) => {
+      const targetId = link.getAttribute('href').slice(1);
+      const isActive = sections[currentIndex].id === targetId;
+      if (isActive) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  const goTo = (index) => {
+    if (index < 0 || index >= sections.length) {
+      return;
+    }
+    currentIndex = index;
+    sections.forEach((section, idx) => {
+      const isActive = idx === currentIndex;
+      section.toggleAttribute('hidden', !isActive);
+    });
+    prevButton.disabled = currentIndex === 0;
+    nextButton.disabled = currentIndex === sections.length - 1;
+    updateNavLinks();
+    focusSection(sections[currentIndex]);
+  };
+
+  prevButton.addEventListener('click', () => {
+    goTo(currentIndex - 1);
+  });
+
+  nextButton.addEventListener('click', () => {
+    goTo(currentIndex + 1);
+  });
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const targetId = link.getAttribute('href').slice(1);
+      const targetIndex = sections.findIndex((section) => section.id === targetId);
+      if (targetIndex !== -1) {
+        goTo(targetIndex);
+      }
+    });
+  });
+
+  goTo(0);
 }
