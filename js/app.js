@@ -182,10 +182,12 @@ if (document.readyState === 'loading') {
 }
 
 function setupSectionNavigation() {
+  const main = document.querySelector('main');
   const sections = Array.from(document.querySelectorAll('main > section'));
   const prevButton = document.getElementById('prevSection');
   const nextButton = document.getElementById('nextSection');
-  if (!sections.length || !prevButton || !nextButton) {
+  const toggleButton = document.getElementById('toggleContinuous');
+  if (!main || !sections.length) {
     return;
   }
 
@@ -196,11 +198,27 @@ function setupSectionNavigation() {
   });
 
   const navLinks = Array.from(document.querySelectorAll('header nav a'));
-  let currentIndex = 0;
+  const prefersReducedMotion = window.matchMedia
+    ? window.matchMedia('(prefers-reduced-motion: reduce)')
+    : { matches: false };
+  const getScrollBehavior = () => (prefersReducedMotion.matches ? 'auto' : 'smooth');
 
-  const focusSection = (section) => {
-    section.focus({ preventScroll: true });
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const hashTarget = window.location.hash.slice(1);
+  let currentIndex = Math.max(
+    0,
+    sections.findIndex((section) => section.id === hashTarget)
+  );
+  let isFragmented = false;
+
+  const updateHash = (id) => {
+    if (!id) {
+      return;
+    }
+    if (typeof history !== 'undefined' && typeof history.replaceState === 'function') {
+      history.replaceState(null, '', `#${id}`);
+    } else {
+      window.location.hash = id;
+    }
   };
 
   const updateNavLinks = () => {
@@ -215,39 +233,134 @@ function setupSectionNavigation() {
     });
   };
 
-  const goTo = (index) => {
+  const applySectionState = () => {
+    sections.forEach((section, index) => {
+      const isActive = index === currentIndex;
+      section.classList.toggle('is-active', isActive);
+      if (isFragmented) {
+        if (isActive) {
+          section.removeAttribute('hidden');
+        } else {
+          section.setAttribute('hidden', '');
+        }
+      } else {
+        section.removeAttribute('hidden');
+      }
+    });
+    if (prevButton) {
+      prevButton.disabled = currentIndex === 0;
+    }
+    if (nextButton) {
+      nextButton.disabled = currentIndex === sections.length - 1;
+    }
+    updateNavLinks();
+    main.classList.toggle('is-fragmented', isFragmented);
+    if (toggleButton) {
+      toggleButton.setAttribute('aria-pressed', String(isFragmented));
+      toggleButton.textContent = isFragmented ? 'Vista continua' : 'Vista seccionada';
+    }
+  };
+
+  const focusSection = (section, behavior = getScrollBehavior()) => {
+    section.focus({ preventScroll: true });
+    section.scrollIntoView({ behavior, block: 'start' });
+  };
+
+  const goToIndex = (index, options = {}) => {
     if (index < 0 || index >= sections.length) {
       return;
     }
     currentIndex = index;
-    sections.forEach((section, idx) => {
-      const isActive = idx === currentIndex;
-      section.toggleAttribute('hidden', !isActive);
-    });
-    prevButton.disabled = currentIndex === 0;
-    nextButton.disabled = currentIndex === sections.length - 1;
-    updateNavLinks();
-    focusSection(sections[currentIndex]);
+    applySectionState();
+    if (options.shouldFocus !== false) {
+      focusSection(sections[currentIndex]);
+    }
+    if (options.updateHash !== false) {
+      updateHash(sections[currentIndex].id);
+    }
   };
 
-  prevButton.addEventListener('click', () => {
-    goTo(currentIndex - 1);
-  });
+  if (prevButton) {
+    prevButton.addEventListener('click', () => {
+      goToIndex(currentIndex - 1);
+    });
+  }
 
-  nextButton.addEventListener('click', () => {
-    goTo(currentIndex + 1);
+  if (nextButton) {
+    nextButton.addEventListener('click', () => {
+      goToIndex(currentIndex + 1);
+    });
+  }
+
+  if (toggleButton) {
+    toggleButton.addEventListener('click', () => {
+      isFragmented = !isFragmented;
+      applySectionState();
+      focusSection(sections[currentIndex], 'auto');
+    });
+  }
+
+  const onIntersection = (entries) => {
+    const visibleEntry = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visibleEntry) {
+      return;
+    }
+    const visibleIndex = sections.indexOf(visibleEntry.target);
+    if (visibleIndex === -1 || visibleIndex === currentIndex) {
+      return;
+    }
+    currentIndex = visibleIndex;
+    applySectionState();
+    updateHash(sections[currentIndex].id);
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(onIntersection, {
+      rootMargin: '-35% 0px -45% 0px',
+      threshold: [0.1, 0.25, 0.5],
+    });
+    sections.forEach((section) => observer.observe(section));
+  } else {
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      const newIndex = sections.findIndex((section) => {
+        const rect = section.getBoundingClientRect();
+        const top = rect.top + window.scrollY;
+        const bottom = rect.bottom + window.scrollY;
+        return scrollPosition >= top && scrollPosition < bottom;
+      });
+      if (newIndex !== -1 && newIndex !== currentIndex) {
+        currentIndex = newIndex;
+        applySectionState();
+        updateHash(sections[currentIndex].id);
+      }
+    });
+  }
+
+  window.addEventListener('hashchange', () => {
+    const targetId = window.location.hash.slice(1);
+    const targetIndex = sections.findIndex((section) => section.id === targetId);
+    if (targetIndex !== -1) {
+      goToIndex(targetIndex, { updateHash: false, shouldFocus: false });
+      sections[targetIndex].focus({ preventScroll: true });
+    }
   });
 
   navLinks.forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
+    link.addEventListener('click', () => {
       const targetId = link.getAttribute('href').slice(1);
       const targetIndex = sections.findIndex((section) => section.id === targetId);
       if (targetIndex !== -1) {
-        goTo(targetIndex);
+        goToIndex(targetIndex, { updateHash: false, shouldFocus: false });
+        sections[targetIndex].focus({ preventScroll: true });
       }
     });
   });
 
-  goTo(0);
+  applySectionState();
+  if (hashTarget && sections[currentIndex]) {
+    focusSection(sections[currentIndex], 'auto');
+  }
 }
