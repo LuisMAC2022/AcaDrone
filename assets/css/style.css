@@ -8,6 +8,16 @@
   --accent: #0c6cf2;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -44,6 +54,13 @@ header nav a {
   font-weight: 600;
 }
 
+header nav a[aria-current="page"] {
+  color: #1f2933;
+  text-decoration: underline;
+  text-decoration-thickness: 0.2em;
+  text-underline-offset: 0.3em;
+}
+
 main {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -57,10 +74,16 @@ section {
   padding: var(--space);
   border: 1px solid var(--border-color);
   border-radius: 8px;
+  scroll-margin-top: 1.5rem;
 }
 
 section h2 {
   margin-top: 0;
+}
+
+section.is-active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(12, 108, 242, 0.15);
 }
 
 .question-gallery {
@@ -178,6 +201,7 @@ footer {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  flex-wrap: wrap;
   padding: 0 var(--space) var(--space);
 }
 
@@ -192,11 +216,20 @@ footer {
   transition: background 0.2s ease, color 0.2s ease;
 }
 
+.section-controls button[aria-pressed="true"] {
+  background: var(--accent);
+  color: #ffffff;
+}
+
 .section-controls button:hover:not(:disabled),
 .section-controls button:focus-visible {
   background: var(--accent);
   color: #ffffff;
   outline: none;
+}
+
+main.is-fragmented {
+  position: relative;
 }
 
 .section-controls button:disabled {
