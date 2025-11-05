@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AcaDrone - Informe Ejecutivo</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>AcaDrone</h1>
+    <p>Cadena de recuperación de PET orientada a drones de reparto ligeros.</p>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="#s1">Carta</a></li>
+        <li><a href="#s2">Título</a></li>
+        <li><a href="#s3">Contenido</a></li>
+        <li><a href="#s4">Resumen ejecutivo</a></li>
+        <li><a href="#s5">Bosquejo</a></li>
+        <li><a href="#s6">Resultado detallado</a></li>
+        <li><a href="#s7">Alternativa</a></li>
+        <li><a href="#s8">Recomendaciones</a></li>
+        <li><a href="#s9">Resumen</a></li>
+        <li><a href="#s10">Apéndice</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="s1">
+      <h2>Carta de presentación</h2>
+      <p>Estimado equipo de innovación, presentamos la propuesta AcaDrone para cerrar el ciclo del PET en operaciones de reparto aéreo.</p>
+      <p>Con esta iniciativa aceleramos la captura de material posconsumo, reducimos costos logísticos y abrimos una nueva vía de manufactura circular.</p>
+      <p>Nuestra cadena combina recolección distribuida, plantas de limpieza y líneas de impresión aditiva para chasis ligeros.</p>
+      <p>Solicitamos su revisión del caso de negocio y del flujo operativo descrito en este informe.</p>
+      <p>Quedamos a disposición para un piloto urbano en los próximos 90 días.</p>
+      <p>Esperamos su retroalimentación para afinar supuestos y compromisos.</p>
+    </section>
+
+    <section id="s2">
+      <h2>Página de título</h2>
+      <form id="inputForm" novalidate>
+        <fieldset>
+          <legend>Parámetros de identificación</legend>
+          <div class="form-row">
+            <label for="inputNp">N_p (puntos de captura)
+              <input id="inputNp" name="N_p" type="number" min="0" step="1" required>
+            </label>
+          </div>
+          <div class="form-row">
+            <label for="inputD">D (días de operación)
+              <input id="inputD" name="D" type="number" min="0" step="1" required>
+            </label>
+          </div>
+          <div class="form-row">
+            <label for="inputGd">g_d (kg/día por punto)
+              <input id="inputGd" name="g_d" type="number" min="0" step="0.01" required>
+            </label>
+          </div>
+          <div class="form-row">
+            <label for="inputPhi">φ (eficiencia de captura)
+              <input id="inputPhi" name="phi" type="number" min="0" max="1" step="0.01" required>
+            </label>
+          </div>
+          <div class="form-row">
+            <label for="inputR">r (tasa de recuperación)
+              <input id="inputR" name="r" type="number" min="0" max="1" step="0.01" required>
+            </label>
+          </div>
+          <div class="form-row">
+            <label for="inputEta">η (rendimiento de impresión)
+              <input id="inputEta" name="eta" type="number" min="0" max="1" step="0.01" required>
+            </label>
+          </div>
+          <div class="form-row">
+            <label for="inputFch">f_chasis (kg por chasis)
+              <input id="inputFch" name="f_chasis" type="number" min="0" step="0.1" required>
+            </label>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+
+    <section id="s3">
+      <h2>Contenido</h2>
+      <ol>
+        <li><a href="#s1">Carta de presentación</a></li>
+        <li><a href="#s2">Página de título</a></li>
+        <li><a href="#s3">Contenido</a></li>
+        <li><a href="#s4">Resumen ejecutivo</a></li>
+        <li><a href="#s5">Bosquejo de estudio</a></li>
+        <li><a href="#s6">Resultado detallado</a></li>
+        <li><a href="#s7">Alternativa del sistema</a></li>
+        <li><a href="#s8">Recomendaciones</a></li>
+        <li><a href="#s9">Resumen</a></li>
+        <li><a href="#s10">Apéndice</a></li>
+      </ol>
+    </section>
+
+    <section id="s4">
+      <h2>Resumen ejecutivo</h2>
+      <ul>
+        <li>Cadena integral desde captura hasta fabricación aditiva.</li>
+        <li>Costos proyectados bajo un esquema de suministro urbano.</li>
+        <li>KPIs actualizados en tiempo real con los parámetros ingresados.</li>
+        <li>Escalabilidad por módulos regionales de procesamiento.</li>
+        <li>Plan de lanzamiento con socios logísticos existentes.</li>
+      </ul>
+      <div class="kpi-snapshot" aria-live="polite">
+        <p><strong>PET generado:</strong> <span id="kpiPetGen">0</span> kg</p>
+        <p><strong>PET recuperado:</strong> <span id="kpiPetRec">0</span> kg</p>
+        <p><strong>Chasis posibles:</strong> <span id="kpiQ">0</span> unidades</p>
+      </div>
+    </section>
+
+    <section id="s5">
+      <h2>Bosquejo de estudio</h2>
+      <p>Pipeline operativo: recolección distribuida → compactación primaria → transporte nocturno → clasificación y lavado → pelletizado → impresión 3D → integración de componentes.</p>
+      <h3>Ecuaciones clave</h3>
+      <ul>
+        <li>PET_gen = N_p × g_d × D</li>
+        <li>PET_rec = PET_gen × φ × r</li>
+        <li>F = PET_rec × η</li>
+        <li>Q = ⌊F ÷ f_chasis⌋</li>
+      </ul>
+    </section>
+
+    <section id="s6">
+      <h2>Resultado detallado</h2>
+      <table id="results">
+        <thead>
+          <tr>
+            <th scope="col">Métrica</th>
+            <th scope="col">Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <canvas id="massChart" aria-label="Gráfico de barras de cadena de masa" role="img"></canvas>
+    </section>
+
+    <section id="s7">
+      <h2>Alternativa del sistema</h2>
+      <p>Escenarios propuestos para iteración futura:</p>
+      <table class="placeholder">
+        <thead>
+          <tr>
+            <th>Escenario</th>
+            <th>Descripción</th>
+            <th>Supuesto clave</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Base</td>
+            <td>Operación urbana con socios actuales.</td>
+            <td>Demanda estable.</td>
+          </tr>
+          <tr>
+            <td>Optimista</td>
+            <td>Expansión regional acelerada.</td>
+            <td>Duplicación de N_p en 12 meses.</td>
+          </tr>
+          <tr>
+            <td>Conservador</td>
+            <td>Piloto limitado a dos distritos.</td>
+            <td>Reducción del 20% en g_d.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="s8">
+      <h2>Recomendaciones</h2>
+      <ul>
+        <li>Formalizar convenios con centros de acopio municipales.</li>
+        <li>Monitorear el rendimiento de impresión por lote.</li>
+        <li>Definir esquema de precios para chasis remanufacturados.</li>
+        <li>Establecer panel de seguimiento para PET recuperado.</li>
+      </ul>
+    </section>
+
+    <section id="s9">
+      <h2>Resumen</h2>
+      <p>AcaDrone habilita un modelo de economía circular para drones logísticos.</p>
+      <p>Los indicadores clave muestran capacidad para abastecer la flota anual.</p>
+      <p>La inversión inicial se respalda con ahorros en materiales vírgenes.</p>
+      <p>Requiere coordinación temprana con autoridades y recicladores.</p>
+    </section>
+
+    <section id="s10">
+      <h2>Apéndice</h2>
+      <p>Dominios involucrados: reciclaje urbano, manufactura aditiva, logística aérea, análisis de ciclo de vida.</p>
+      <p>Supuestos de costos: energía estable a tarifa industrial, logística nocturna tercerizada, personal de planta en turnos mixtos, mantenimiento preventivo trimestral.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2024 AcaDrone.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
