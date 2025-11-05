@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Destino del PET recolectado</title>
+  <desc id="desc">Mapa estilizado con flechas que señalan centros de acopio.</desc>
+  <rect width="160" height="160" rx="24" fill="#f2f7f2" />
+  <path d="M40 120l40-72 40 72" fill="none" stroke="#3b7a57" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+  <g fill="#79c98b">
+    <circle cx="80" cy="48" r="12" />
+    <circle cx="48" cy="112" r="10" />
+    <circle cx="112" cy="112" r="10" />
+  </g>
+  <path d="M80 32v-8M80 128v-8M32 80h8M120 80h8" stroke="#3b7a57" stroke-width="6" stroke-linecap="round" />
+  <path d="M60 96l20-16 20 16" fill="none" stroke="#3b7a57" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="80" cy="80" r="20" fill="none" stroke="#79c98b" stroke-width="6" stroke-dasharray="6 10" />
+</svg>
