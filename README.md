@@ -1,84 +1,98 @@
-# AcaDrone Reboot
+# AcaDrone
+Objetivo: página web de una sola página que cumpla las 10 secciones de presentación de proyecto con UI mínima, una tabla de resultados y un gráfico de barras.
 
-Plataforma de una sola página para estimar la cadena de recuperación de PET aplicado a chasis de drones educativos. El reinicio
-2024 prioriza accesibilidad, narrativa rica y validaciones inmediatas para capturar datos confiables incluso en contextos sin
-JavaScript.
+Secciones obligatorias
 
-## Secciones obligatorias
+1. Carta de presentación
 
-1. Carta de presentación  
-2. Página de título  
-3. Contenido (índice con anclas y modo guiado)  
-4. Resumen ejecutivo  
-5. Bosquejo de estudio  
-6. Resultado detallado (simulador)  
-7. Alternativa del sistema  
-8. Recomendaciones  
-9. Resumen  
+
+2. Página de título
+
+
+3. Contenido (índice con anclas)
+
+
+4. Resumen ejecutivo
+
+
+5. Bosquejo de estudio
+
+
+6. Resultado detallado
+
+
+7. Alternativa del sistema
+
+
+8. Recomendaciones
+
+
+9. Resumen
+
+
 10. Apéndice
 
-## Entradas y ecuaciones clave
 
-Parámetros (`N_p`, `D`, `g_d`, `φ`, `r`, `η`, `f_chasis`, `costo_unitario`).
 
-```
+Entradas mínimas
+
+N_p, D, g_d, φ, r, η, f_chasis
+Ecuaciones:
+
 PET_gen = N_p * g_d * D
+
 PET_rec = PET_gen * φ * r
+
 F = PET_rec * η
+
 Q = floor(F / f_chasis)
-Costo_mensual = Q * costo_unitario
-```
 
-KPIs renderizados: `PET_gen`, `PET_rec`, `F`, `Q`, `costo_unitario`, `costo_mensual`.
 
-## Arquitectura actual
+KPIs mínimos
 
-- **`index.html`**: contiene las diez secciones, valores pre-renderizados para modo sin JavaScript, tabla KPI accesible y gráfico
-  semántico con descripción textual.
-- **`styles/main.css`**: tema claro con contraste AA+, componentes reutilizables (`panel`, `highlight-grid`, `chart`).
-- **`scripts/main.js`**: orquestador modular que activa validaciones, recalcula métricas y controla el modo guiado por secciones.
-- **`scripts/modules/calculation.js`**: lógica de saneamiento numérico, formateo y cálculo de métricas.
-- **`scripts/services/configuration.js`**: carga `data/defaults.json` con retroceso a valores embebidos para escenarios sin servidor.
-- **`data/defaults.json`**: parámetros base descargables desde el apéndice.
-- **`Reboot.md`**: diagnóstico estratégico y hoja de ruta para futuras iteraciones.
+PET_gen, PET_rec, F, Q, Costo_unitario (este último puede ser editable o fijo).
+
+Entregables v0
+
+Estructura HTML con 10 secciones.
+
+Form con 7 inputs numéricos.
+
+Tabla única “Métrica | Valor”.
+
+Gráfico de barras “Cadena de masa” con PET_gen, PET_rec, F.
+
+Sin dependencias externas. Solo HTML/CSS/JS puro.
 
 ## Cambios recientes
 
-- Se eliminó la versión anterior y se reconstruyó el sitio desde `Reboot.md`, introduciendo arquitectura modular con datos
-  pre-renderizados y un modo guiado opcional.  
-- Se rediseñó el simulador para validar campos en tiempo real, mostrar mensajes accesibles y mantener métricas disponibles sin
-  depender de `fetch`.  
-- Se movió `Reboot.md` a la raíz del repositorio para facilitar su consulta durante futuras iteraciones.
+- La navegación ahora mantiene todas las secciones visibles por defecto, añade un modo guiado opcional y sincroniza los anclajes para conservar la experiencia de lectura continua incluso sin JavaScript.
+- El modo guiado paso a paso conserva los botones de avance y retroceso para quienes prefieren revisar una sección a la vez.
+- La carta de presentación ahora presenta las tres preguntas clave en un mosaico visual 2x3 con imágenes ilustrativas accesibles que alternan la posición del texto para reforzar la narrativa.
+- Se documentó un análisis profundo de usabilidad en `docs/usabilidad.md`, incluyendo prioridades de mejora y próximos pasos sugeridos.
+- Se elaboró el informe `docs/Reboot.md` con un diagnóstico integral del estado actual y una hoja de ruta de reinicio que prioriza accesibilidad, validación de datos y arquitectura escalable.
 
 ## Propuestas de desarrollo
 
-- Publicar una API mock (`/api/escenarios`) que permita versionar conjuntos de parámetros y alimentar el simulador con escenarios
-  históricos para comparaciones A/B.  
-- Implementar auditorías automáticas de accesibilidad (axe-core/pa11y) en CI para garantizar que cada iteración mantenga los
-  estándares AA.  
-- Diseñar un panel de análisis con visualizaciones históricas (line charts y sankey) utilizando los datos exportados desde la
-  plataforma.
+- Incorporar un modo de presentación automática que avance por las secciones tras un intervalo configurable, ideal para exhibiciones sin intervención del usuario.
+- Diseñar un recorrido interactivo que narre el trayecto del PET desde la captura hasta la manufactura, integrando métricas en tiempo real y testimonios visuales.
+- Agregar un módulo multimedia que permita insertar clips cortos sobre puntos de acopio y testimonios estudiantiles, optimizado para carga progresiva y subtítulos accesibles.
+- Implementar un centro de ayuda contextual en el formulario que ofrezca glosarios, ejemplos de parámetros y enlaces a documentación para reducir errores de captura.
+- Diseñar un sumario lateral pegajoso que muestre el progreso de lectura y permita saltar entre secciones con indicaciones visuales de estado.
+- Construir una librería de componentes web accesibles (Web Components o Svelte) que encapsule formularios, paneles KPI y tablas para reutilizarlos en futuras iteraciones o micrositios.
 
-## Estructura de carpetas
 
-```
+Estructura de carpetas
+
 /
-├─ README.md
-├─ Reboot.md
 ├─ index.html
+├─ assets/
+│  ├─ css/style.css
+│  └─ img/ (logos opcionales)
+├─ js/
+│  └─ app.js
 ├─ data/
 │  └─ defaults.json
-├─ scripts/
-│  ├─ main.js
-│  ├─ modules/
-│  │  └─ calculation.js
-│  └─ services/
-│     └─ configuration.js
-└─ styles/
-   └─ main.css
-```
-
-## Cómo ejecutar
-
-Abrir `index.html` en un navegador moderno. El simulador funciona en modo desconectado gracias a los valores embebidos y mejora
-los cálculos cuando `data/defaults.json` está disponible a través de un servidor estático.
+├─ docs/
+│  └─ spec_minima.md
+└─ LICENSE

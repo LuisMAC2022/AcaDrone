@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-labelledby="title desc">
+  <title id="title">Generación de PET diaria</title>
+  <desc id="desc">Ilustración abstracta de botellas y un sol que representa la producción constante de PET.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d1f4ff"/>
+      <stop offset="100%" stop-color="#f0f9ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="240" fill="url(#bg)" rx="24"/>
+  <g fill="#0c6cf2" opacity="0.75">
+    <rect x="60" y="80" width="36" height="120" rx="12"/>
+    <rect x="120" y="60" width="36" height="140" rx="12"/>
+    <rect x="180" y="90" width="36" height="110" rx="12"/>
+    <rect x="240" y="70" width="36" height="130" rx="12"/>
+  </g>
+  <circle cx="80" cy="72" r="24" fill="#ffb400" opacity="0.8"/>
+</svg>
