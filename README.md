@@ -70,6 +70,7 @@ Sin dependencias externas. Solo HTML/CSS/JS puro.
 - El modo guiado paso a paso conserva los botones de avance y retroceso para quienes prefieren revisar una sección a la vez.
 - La carta de presentación ahora presenta las tres preguntas clave en un mosaico visual 2x3 con imágenes ilustrativas accesibles que alternan la posición del texto para reforzar la narrativa.
 - Se documentó un análisis profundo de usabilidad en `docs/usabilidad.md`, incluyendo prioridades de mejora y próximos pasos sugeridos.
+- Se elaboró el informe `docs/Reboot.md` con un diagnóstico integral del estado actual y una hoja de ruta de reinicio que prioriza accesibilidad, validación de datos y arquitectura escalable.
 
 ## Propuestas de desarrollo
 
@@ -78,6 +79,7 @@ Sin dependencias externas. Solo HTML/CSS/JS puro.
 - Agregar un módulo multimedia que permita insertar clips cortos sobre puntos de acopio y testimonios estudiantiles, optimizado para carga progresiva y subtítulos accesibles.
 - Implementar un centro de ayuda contextual en el formulario que ofrezca glosarios, ejemplos de parámetros y enlaces a documentación para reducir errores de captura.
 - Diseñar un sumario lateral pegajoso que muestre el progreso de lectura y permita saltar entre secciones con indicaciones visuales de estado.
+- Construir una librería de componentes web accesibles (Web Components o Svelte) que encapsule formularios, paneles KPI y tablas para reutilizarlos en futuras iteraciones o micrositios.
 
 
 Estructura de carpetas
