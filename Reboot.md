@@ -28,3 +28,4 @@ El sitio actual de AcaDrone presenta una narrativa sólida que recorre la cadena
 1. Elaborar una hoja de ruta con entregables quincenales para validar la arquitectura nueva y migrar progresivamente las secciones.
 2. Realizar pruebas con usuarios (estudiantes y operadores logísticos) para priorizar funcionalidades críticas en la nueva versión.
 3. Documentar contratos de datos y definir mocks para poder desarrollar sin depender de la infraestructura final.
+
