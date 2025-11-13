@@ -183,10 +183,10 @@
       </section>
     </main>
 
-    <nav id="section-navigation" aria-label="Navegación entre secciones" hidden>
-      <button type="button" id="previous-section">Anterior</button>
+    <nav id="section-navigation" aria-label="Navegación entre secciones">
+      <button type="button" id="previous-section" hidden>Anterior</button>
       <p id="section-status" role="status" aria-live="polite">Modo continuo activo.</p>
-      <button type="button" id="next-section">Siguiente</button>
+      <button type="button" id="next-section" hidden>Siguiente</button>
     </nav>
 
     <footer>
@@ -239,7 +239,8 @@
         updateSectionsVisibility();
         updateNavigationButtons();
         updateStatusMessage();
-        sectionNavigation.hidden = !singleSectionMode;
+        previousButton.hidden = !singleSectionMode;
+        nextButton.hidden = !singleSectionMode;
       }
 
       toggleModeButton.addEventListener('click', () => {
