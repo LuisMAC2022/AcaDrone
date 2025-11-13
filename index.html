@@ -203,9 +203,29 @@
       let singleSectionMode = false;
       let currentIndex = 0;
 
+      function getSectionTitle(index) {
+        const section = sections[index];
+        if (!section) {
+          return '';
+        }
+        const heading = section.querySelector('h2');
+        return heading?.textContent?.trim() ?? '';
+      }
+
       function updateNavigationButtons() {
-        previousButton.disabled = currentIndex === 0;
-        nextButton.disabled = currentIndex === sections.length - 1;
+        const previousIndex = currentIndex - 1;
+        const nextIndex = currentIndex + 1;
+
+        previousButton.disabled = previousIndex < 0;
+        nextButton.disabled = nextIndex >= sections.length;
+
+        previousButton.textContent = previousIndex >= 0
+          ? `Anterior: ${getSectionTitle(previousIndex)}`
+          : 'Anterior';
+
+        nextButton.textContent = nextIndex < sections.length
+          ? `Siguiente: ${getSectionTitle(nextIndex)}`
+          : 'Siguiente';
       }
 
       function updateSectionsVisibility() {
