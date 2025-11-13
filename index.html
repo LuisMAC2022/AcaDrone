@@ -3,342 +3,79 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AcaDrone Reboot</title>
+    <title>AcaDrone · MVP</title>
     <link rel="stylesheet" href="styles/main.css" />
   </head>
   <body>
+    <a class="skip-link" href="#principal">Saltar al contenido principal</a>
     <header class="site-header">
-      <div class="site-header__intro">
-        <p class="eyebrow">Iniciativa de economía circular para drones educativos</p>
-        <h1 id="top">AcaDrone · Reinicio 2024</h1>
+      <div class="wrapper">
+        <p class="eyebrow">Lorem ipsum dolor sit amet</p>
+        <h1>AcaDrone</h1>
         <p class="lede">
-          Plataforma accesible para estimar el potencial de recuperación de PET y proyectar
-          la fabricación de chasis de drones académicos.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
         </p>
+        <nav aria-label="Navegación principal" class="site-nav">
+          <ul>
+            <li><a href="#introduccion">Introducción</a></li>
+            <li><a href="#estructura">Estructura</a></li>
+            <li><a href="#proyeccion">Proyección</a></li>
+          </ul>
+        </nav>
       </div>
-      <nav aria-label="Índice principal" class="site-nav">
-        <ul>
-          <li><a href="#carta">Carta</a></li>
-          <li><a href="#titulo">Título</a></li>
-          <li><a href="#indice">Contenido</a></li>
-          <li><a href="#resumen-ejecutivo">Resumen ejecutivo</a></li>
-          <li><a href="#bosquejo">Bosquejo</a></li>
-          <li><a href="#resultado">Resultados</a></li>
-          <li><a href="#alternativa">Alternativas</a></li>
-          <li><a href="#recomendaciones">Recomendaciones</a></li>
-          <li><a href="#resumen">Resumen</a></li>
-          <li><a href="#apendice">Apéndice</a></li>
-        </ul>
-      </nav>
     </header>
 
-    <main id="contenido-principal">
-      <noscript>
-        <p class="alerta">
-          Esta versión incluye cálculos pre-renderizados. Para validar nuevos escenarios
-          activa JavaScript o descarga la hoja de cálculo de contingencia descrita en el
-          apéndice.
+    <main id="principal" class="site-main">
+      <section id="introduccion" aria-labelledby="introduccion-titulo" class="panel">
+        <div class="panel__header">
+          <h2 id="introduccion-titulo">Introducción</h2>
+        </div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse
+          lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
         </p>
-      </noscript>
+      </section>
 
-      <section id="carta" aria-labelledby="carta-titulo" class="panel">
+      <section id="estructura" aria-labelledby="estructura-titulo" class="panel">
         <div class="panel__header">
-          <h2 id="carta-titulo">1. Carta de presentación</h2>
-          <p class="panel__tag">Visión y compromiso</p>
+          <h2 id="estructura-titulo">Estructura</h2>
         </div>
-        <div class="panel__body">
+        <article>
+          <h3>Componente uno</h3>
           <p>
-            AcaDrone consolida una alianza entre facultades de ingeniería y cooperativas
-            de reciclaje para transformar PET recuperado en drones didácticos. El reinicio
-            2024 enfatiza transparencia de datos, accesibilidad y acompañamiento docente.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec odio. Quisque volutpat
+            mattis eros. Nullam malesuada erat ut turpis.
           </p>
-          <dl class="highlight-grid" aria-label="Preguntas guía">
-            <div>
-              <dt>¿Por qué ahora?</dt>
-              <dd>En 18 meses la demanda de drones educativos crecerá 45% en la región.</dd>
-            </div>
-            <div>
-              <dt>¿Quién participa?</dt>
-              <dd>32 escuelas públicas, 4 laboratorios universitarios y 11 cooperativas de PET.</dd>
-            </div>
-            <div>
-              <dt>¿Qué cambia?</dt>
-              <dd>
-                Cada lote de PET cuenta con trazabilidad completa, métricas auditables y un
-                plan de mantenimiento comunitario.
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </section>
-
-      <section id="titulo" aria-labelledby="titulo-principal" class="panel">
-        <div class="panel__header">
-          <h2 id="titulo-principal">2. Página de título</h2>
-          <p class="panel__tag">Ficha ejecutiva</p>
-        </div>
-        <div class="panel__body">
-          <ul class="meta-list">
-            <li><strong>Proyecto:</strong> AcaDrone Reboot</li>
-            <li><strong>Fase:</strong> Validación de arquitectura accesible</li>
-            <li><strong>Periodo:</strong> Q2 2024</li>
-            <li><strong>Coordinación:</strong> Laboratorio de Innovación Circular</li>
-            <li><strong>Contacto:</strong> estrategia@acadrone.org</li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="indice" aria-labelledby="indice-titulo" class="panel">
-        <div class="panel__header">
-          <h2 id="indice-titulo">3. Contenido</h2>
-          <p class="panel__tag">Índice interactivo</p>
-        </div>
-        <div class="panel__body">
+        </article>
+        <article>
+          <h3>Componente dos</h3>
           <p>
-            Utiliza la navegación superior o los accesos rápidos para saltar a cada
-            sección. El estado actual se anuncia en voz mediante la región viva cuando se
-            activa el modo guiado.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam nec ante. Sed lacinia,
+            urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis.
           </p>
-          <div class="guided-mode" data-guided="false">
-            <button type="button" id="toggle-mode" aria-pressed="false">
-              Activar modo guiado
-            </button>
-            <div class="guided-controls" hidden>
-              <button type="button" id="prev-section">Sección anterior</button>
-              <button type="button" id="next-section">Siguiente sección</button>
-              <p id="guided-status" role="status" aria-live="polite"></p>
-            </div>
-          </div>
-        </div>
+        </article>
       </section>
 
-      <section id="resumen-ejecutivo" aria-labelledby="resumen-ejecutivo-titulo" class="panel">
+      <section id="proyeccion" aria-labelledby="proyeccion-titulo" class="panel">
         <div class="panel__header">
-          <h2 id="resumen-ejecutivo-titulo">4. Resumen ejecutivo</h2>
-          <p class="panel__tag">Impacto estimado</p>
+          <h2 id="proyeccion-titulo">Proyección</h2>
         </div>
-        <div class="panel__body">
-          <p>
-            Con los parámetros base, AcaDrone puede convertir 42 toneladas de PET anuales en
-            14&nbsp;400 chasis modulares, evitando 21 toneladas de CO₂eq. El flujo automatiza
-            la articulación entre captación, descontaminación y manufactura, con contratos de
-            abastecimiento asegurados por tres años.
-          </p>
-          <p>
-            Las métricas clave se recalculan conforme ajustas los factores de densidad,
-            pureza y rendimiento. Las validaciones actúan al instante para mostrar los
-            campos que requieren ajustes.
-          </p>
-        </div>
-      </section>
-
-      <section id="bosquejo" aria-labelledby="bosquejo-titulo" class="panel">
-        <div class="panel__header">
-          <h2 id="bosquejo-titulo">5. Bosquejo de estudio</h2>
-          <p class="panel__tag">Metodología</p>
-        </div>
-        <div class="panel__body">
-          <ol class="steps">
-            <li>Caracterización mensual de PET recuperado por campus participante.</li>
-            <li>Simulación de descontaminación y molienda con eficiencia auditada.</li>
-            <li>Diseño modular del chasis y validación estructural en laboratorio.</li>
-            <li>Pilotos con clubes estudiantiles y medición de satisfacción.</li>
-            <li>Plan de escalamiento regional con métricas de impacto y costos evitados.</li>
-          </ol>
-        </div>
-      </section>
-
-      <section id="resultado" aria-labelledby="resultado-titulo" class="panel">
-        <div class="panel__header">
-          <h2 id="resultado-titulo">6. Resultado detallado</h2>
-          <p class="panel__tag">Simulador de cadena de masa</p>
-        </div>
-        <div class="panel__body">
-          <form id="param-form" novalidate>
-            <div class="field-grid">
-              <div class="field">
-                <label for="param-N_p">N° de participantes (N_p)</label>
-                <p id="hint-N_p" class="field-hint">Estudiantes por cohorte con kits de recolección.</p>
-                <input id="param-N_p" name="N_p" type="number" min="1" step="1" required aria-describedby="hint-N_p error-N_p" />
-                <p id="error-N_p" class="field-error" role="alert"></p>
-              </div>
-              <div class="field">
-                <label for="param-D">Densidad de PET (D)</label>
-                <p id="hint-D" class="field-hint">Kg de PET recuperado por participante y mes.</p>
-                <input id="param-D" name="D" type="number" min="0" step="0.01" required aria-describedby="hint-D error-D" />
-                <p id="error-D" class="field-error" role="alert"></p>
-              </div>
-              <div class="field">
-                <label for="param-g_d">Factor de generación (g_d)</label>
-                <p id="hint-g_d" class="field-hint">Relación entre PET recolectado y utilizable tras selección.</p>
-                <input id="param-g_d" name="g_d" type="number" min="0" step="0.01" required aria-describedby="hint-g_d error-g_d" />
-                <p id="error-g_d" class="field-error" role="alert"></p>
-              </div>
-              <div class="field">
-                <label for="param-phi">Pureza (φ)</label>
-                <p id="hint-phi" class="field-hint">Porcentaje de PET libre de contaminantes tras lavado.</p>
-                <input id="param-phi" name="phi" type="number" min="0" max="1" step="0.01" required aria-describedby="hint-phi error-phi" />
-                <p id="error-phi" class="field-error" role="alert"></p>
-              </div>
-              <div class="field">
-                <label for="param-r">Rendimiento de molienda (r)</label>
-                <p id="hint-r" class="field-hint">Fracción convertida en pellets listos para extrusión.</p>
-                <input id="param-r" name="r" type="number" min="0" max="1" step="0.01" required aria-describedby="hint-r error-r" />
-                <p id="error-r" class="field-error" role="alert"></p>
-              </div>
-              <div class="field">
-                <label for="param-eta">Eficiencia de extrusión (η)</label>
-                <p id="hint-eta" class="field-hint">Fracción de pellets que se convierte en piezas útiles.</p>
-                <input id="param-eta" name="eta" type="number" min="0" max="1" step="0.01" required aria-describedby="hint-eta error-eta" />
-                <p id="error-eta" class="field-error" role="alert"></p>
-              </div>
-              <div class="field">
-                <label for="param-f_chasis">PET por chasis (f_chasis)</label>
-                <p id="hint-f_chasis" class="field-hint">Kilogramos de PET necesarios por chasis.</p>
-                <input id="param-f_chasis" name="f_chasis" type="number" min="0.1" step="0.01" required aria-describedby="hint-f_chasis error-f_chasis" />
-                <p id="error-f_chasis" class="field-error" role="alert"></p>
-              </div>
-              <div class="field">
-                <label for="param-costo_unitario">Costo unitario (USD)</label>
-                <p id="hint-costo_unitario" class="field-hint">Costo estimado por chasis impreso.</p>
-                <input id="param-costo_unitario" name="costo_unitario" type="number" min="0" step="0.01" required aria-describedby="hint-costo_unitario error-costo_unitario" />
-                <p id="error-costo_unitario" class="field-error" role="alert"></p>
-              </div>
-            </div>
-          </form>
-
-          <section aria-labelledby="kpi-titulo" class="kpi-section">
-            <h3 id="kpi-titulo">Tabla de métricas</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Métrica</th>
-                  <th scope="col">Valor</th>
-                </tr>
-              </thead>
-              <tbody id="kpi-body">
-                <tr><th scope="row">PET generado (PET_gen)</th><td data-metric="PET_gen">1,326 kg/mes</td></tr>
-                <tr><th scope="row">PET recuperado (PET_rec)</th><td data-metric="PET_rec">829.55 kg/mes</td></tr>
-                <tr><th scope="row">Material final (F)</th><td data-metric="F">688.53 kg/mes</td></tr>
-                <tr><th scope="row">Chasis factibles (Q)</th><td data-metric="Q">237 unidades</td></tr>
-                <tr><th scope="row">Costo unitario</th><td data-metric="costo_unitario">US$118.50</td></tr>
-                <tr><th scope="row">Inversión mensual</th><td data-metric="costo_mensual">US$28,084.50</td></tr>
-              </tbody>
-            </table>
-            <p id="calculation-summary" class="calculation-summary" role="status" aria-live="polite">
-              Con los valores base se generan 1,326 kg/mes de PET, se recuperan 829.55 kg/mes y se convierten en 688.53 kg/mes,
-              habilitando 237 chasis con una inversión mensual estimada de US$28,084.50.
-            </p>
-          </section>
-
-          <section aria-labelledby="chart-title" class="chart-section">
-            <div class="chart" role="img" aria-labelledby="chart-title chart-desc">
-              <h3 id="chart-title">Cadena de masa</h3>
-              <p id="chart-desc">Comparación de PET generado, recuperado y material final.</p>
-              <div class="chart__bars" data-unit="kg">
-                <div class="chart__bar" data-bar="PET_gen" style="--bar-height: 12rem;">
-                  <span class="chart__label">PET_gen</span>
-                  <span class="chart__value">1326</span>
-                </div>
-                <div class="chart__bar" data-bar="PET_rec" style="--bar-height: 7.5rem;">
-                  <span class="chart__label">PET_rec</span>
-                  <span class="chart__value">829.6</span>
-                </div>
-                <div class="chart__bar" data-bar="F" style="--bar-height: 6.2rem;">
-                  <span class="chart__label">F</span>
-                  <span class="chart__value">688.5</span>
-                </div>
-              </div>
-            </div>
-            <p class="chart-text" id="chart-text" aria-live="polite">
-              En el escenario base se recupera el 62.6% del PET generado y se conserva el 51.9% para la fabricación final.
-            </p>
-          </section>
-        </div>
-      </section>
-
-      <section id="alternativa" aria-labelledby="alternativa-titulo" class="panel">
-        <div class="panel__header">
-          <h2 id="alternativa-titulo">7. Alternativa del sistema</h2>
-          <p class="panel__tag">Escenario extendido</p>
-        </div>
-        <div class="panel__body">
-          <p>
-            Para contingencias sin PET suficiente, se dispone de un plan híbrido con biopolímeros
-            certificados. La comparación de métricas se registra en el apéndice con supuestos de
-            energía renovable y logística inversa compartida.
-          </p>
-          <ul class="comparison">
-            <li><strong>Escenario PET:</strong> Reducción de 68% en costo de material frente a virgen.</li>
-            <li><strong>Escenario Híbrido:</strong> Requiere 22% más energía pero mantiene 95% de
-              rigidez estructural.</li>
-            <li><strong>Escenario Mixto:</strong> Optimiza disponibilidad en temporadas con baja
-              recolección estudiantil.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="recomendaciones" aria-labelledby="recomendaciones-titulo" class="panel">
-        <div class="panel__header">
-          <h2 id="recomendaciones-titulo">8. Recomendaciones</h2>
-          <p class="panel__tag">Pasos accionables</p>
-        </div>
-        <div class="panel__body">
-          <ul class="recommendations">
-            <li>Formalizar acuerdos de compra garantizada con dos nuevas cooperativas rurales.</li>
-            <li>Integrar validaciones de laboratorio en un tablero de control accesible.</li>
-            <li>Implementar un sistema de seguimiento post-entrega con métricas de uso real.</li>
-            <li>Publicar reportes trimestrales de circularidad con datasets abiertos.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="resumen" aria-labelledby="resumen-titulo" class="panel">
-        <div class="panel__header">
-          <h2 id="resumen-titulo">9. Resumen</h2>
-          <p class="panel__tag">Cierre</p>
-        </div>
-        <div class="panel__body">
-          <p>
-            El reinicio presenta una arquitectura modular sin dependencias externas, con datos
-            iniciales accesibles desde el HTML y actualizaciones progresivas cuando JavaScript
-            está disponible. Las validaciones mejoran la captura y los indicadores se explican en
-            lenguaje claro para equipos interdisciplinarios.
-          </p>
-        </div>
-      </section>
-
-      <section id="apendice" aria-labelledby="apendice-titulo" class="panel">
-        <div class="panel__header">
-          <h2 id="apendice-titulo">10. Apéndice</h2>
-          <p class="panel__tag">Recursos</p>
-        </div>
-        <div class="panel__body">
-          <ul class="appendix">
-            <li>
-              <strong>Hoja de cálculo de contingencia:</strong>
-              <a href="data/defaults.json" download="defaults.json">Descargar parámetros base</a>.
-            </li>
-            <li>
-              <strong>Instrumentación analítica:</strong> eventos listos para conectar con
-              herramientas como Plausible o Matomo.
-            </li>
-            <li>
-              <strong>Contrato de datos:</strong> documentado en <code>Reboot.md</code> para futuras
-              integraciones.
-            </li>
-          </ul>
-        </div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas malesuada elit lectus
+          felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna.
+        </p>
+        <ul>
+          <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+          <li>Vestibulum auctor dapibus neque.</li>
+          <li>Nunc dignissim risus id metus.</li>
+        </ul>
       </section>
     </main>
 
     <footer class="site-footer">
-      <a class="back-to-top" href="#top">Volver al inicio</a>
-      <p>© 2024 Laboratorio de Innovación Circular · Licencia CC-BY 4.0</p>
+      <div class="wrapper">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
     </footer>
-
-    <script type="module" src="scripts/main.js"></script>
   </body>
 </html>
-
-
