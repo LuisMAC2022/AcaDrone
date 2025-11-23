@@ -3,25 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Presentación interactiva sobre generación de PET</title>
+    <title>Demostración de modos de secciones</title>
     <style>
       :root {
+        color-scheme: light dark;
         font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-        line-height: 1.5;
-        color: #0a1f33;
-        background-color: #e8f1fb;
+        line-height: 1.6;
       }
 
       body {
         margin: 0;
-        background: radial-gradient(circle at 20% 20%, #eaf6ff, #d5e8ff 60%, #cfe7ff),
-          linear-gradient(180deg, #0a2c58 0%, #0e3a73 40%, #0a2c58 100%);
-        color: #eaf6ff;
-        min-height: 100vh;
-      }
-
-      a {
-        color: #8fe3c4;
+        padding: 0 1.5rem 2rem;
+        background-color: Canvas;
+        color: CanvasText;
       }
 
       .skip-link {
@@ -29,210 +23,93 @@
         top: 0.5rem;
         left: 0.5rem;
         padding: 0.5rem 0.75rem;
-        background-color: #f5d565;
-        color: #0a1f33;
-        border-radius: 0.4rem;
-        transform: translateY(-160%);
+        background-color: Highlight;
+        color: HighlightText;
+        border-radius: 0.25rem;
+        transform: translateY(-150%);
         transition: transform 0.2s ease-in-out;
-        font-weight: 700;
       }
 
       .skip-link:focus {
         transform: translateY(0);
       }
 
+      header,
+      main,
+      nav,
+      footer {
+        max-width: 70ch;
+        margin: 0 auto;
+      }
+
       header {
-        max-width: 72ch;
-        margin: 0 auto;
-        padding: 2.5rem 1rem 1.5rem;
-        text-align: center;
+        padding: 2rem 0 1.5rem;
       }
 
-      header h1 {
-        margin: 0 0 0.5rem;
-        font-size: clamp(1.6rem, 2vw + 1rem, 2.4rem);
-        letter-spacing: 0.02em;
-      }
-
-      header p {
-        margin: 0 auto;
-        max-width: 60ch;
-        color: #d9ecff;
-      }
-
-      main {
-        display: grid;
-        gap: 1.5rem;
-        max-width: 72ch;
-        margin: 0 auto 2.5rem;
-        padding: 0 1rem 2rem;
-      }
-
-      .controls {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        justify-content: center;
-        flex-wrap: wrap;
-        background: rgba(7, 35, 78, 0.75);
-        border: 1px solid rgba(255, 215, 0, 0.2);
-        border-radius: 0.85rem;
-        padding: 1rem 1.25rem;
-      }
-
-      .controls label {
-        font-weight: 700;
-      }
-
-      .visually-hidden {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-      }
-
-      .slider-value {
-        font-variant-numeric: tabular-nums;
-        padding: 0.35rem 0.6rem;
-        background: rgba(143, 227, 196, 0.16);
-        border-radius: 0.5rem;
-        border: 1px solid rgba(143, 227, 196, 0.5);
-        color: #8fe3c4;
-        font-weight: 700;
-      }
-
-      .slide {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 215, 0, 0.15);
-        border-radius: 1rem;
-        padding: 1.25rem 1.4rem 1.5rem;
-        display: none;
-      }
-
-      .slide[aria-hidden="false"] {
-        display: block;
-      }
-
-      .slide header h2 {
-        margin: 0 0 0.35rem;
-        font-size: 1.35rem;
-        color: #b5d9ff;
-      }
-
-      .slide header p {
-        margin: 0 0 0.5rem;
-        color: #d9ecff;
-      }
-
-      figure {
-        margin: 0;
-      }
-
-      .bar-chart {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-        align-items: end;
-        gap: 0.75rem;
-        padding: 1rem;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(0, 0, 0, 0.08));
-        border-radius: 0.75rem;
-        border: 1px solid rgba(143, 227, 196, 0.25);
-      }
-
-      .bar {
-        position: relative;
-        height: 180px;
-        border-radius: 0.75rem 0.75rem 0.35rem 0.35rem;
-        background: linear-gradient(180deg, #4ca1ff, #0f6de0);
-        overflow: hidden;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-      }
-
-      .bar::after {
-        content: attr(data-label);
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: -1.7rem;
-        color: #eaf6ff;
-        font-weight: 700;
-      }
-
-      .bar-value {
-        position: absolute;
-        inset: auto 0 0 0;
-        background: linear-gradient(180deg, rgba(143, 227, 196, 0.9), rgba(43, 156, 115, 0.95));
-        border-top: 2px solid rgba(255, 215, 0, 0.35);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #0a1f33;
-        font-weight: 800;
-        letter-spacing: 0.02em;
-      }
-
-      .chart-caption {
-        margin-top: 1rem;
-        color: #d9ecff;
-      }
-
-      .nav-controls {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin: 1rem auto 0;
+      header > p {
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
       }
 
       button {
         font: inherit;
-        padding: 0.6rem 0.9rem;
-        border-radius: 0.65rem;
-        border: 1px solid rgba(143, 227, 196, 0.6);
-        background: linear-gradient(180deg, rgba(143, 227, 196, 0.9), rgba(39, 140, 104, 0.95));
-        color: #0a1f33;
-        font-weight: 800;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid currentColor;
+        border-radius: 0.4rem;
+        background-color: transparent;
         cursor: pointer;
-        transition: transform 150ms ease, box-shadow 150ms ease;
-      }
-
-      button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
       }
 
       button:focus-visible {
-        outline: 3px solid #f5d565;
-        outline-offset: 2px;
+        outline: 0.25rem solid Highlight;
+        outline-offset: 0.1rem;
       }
 
-      .status {
+      main {
+        display: grid;
+        gap: 1.75rem;
+      }
+
+      section {
+        border: 1px solid currentColor;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+      }
+
+      section:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.25rem rgba(0, 102, 204, 0.35);
+      }
+
+      section > header {
+        margin-bottom: 0.75rem;
+      }
+
+      #section-navigation {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: space-between;
+        padding-top: 0.5rem;
+      }
+
+      #section-status {
+        flex: 1;
         text-align: center;
-        color: #d9ecff;
-        margin-top: 0.5rem;
       }
 
       footer {
-        max-width: 72ch;
-        margin: 0 auto 2.5rem;
-        padding: 0 1rem;
-        color: #d9ecff;
-        text-align: center;
+        padding-top: 2rem;
+        font-size: 0.9rem;
       }
 
-      footer p {
-        margin: 0.35rem 0;
-      }
+      @media (max-width: 42rem) {
+        body {
+          padding-inline: 1rem;
+        }
 
-      @media (max-width: 720px) {
-        .bar {
-          height: 160px;
+        section {
+          padding: 1rem;
         }
       }
     </style>
@@ -240,210 +117,193 @@
   <body>
     <a class="skip-link" href="#principal">Saltar al contenido principal</a>
     <header>
-      <h1>Generación de PET: panorama global y local</h1>
+      <h1>Visualización de secciones con doble modo</h1>
       <p>
-        Diapositivas breves con datos clave y una proyección interactiva. Ajusta el año para
-        ver cómo podrían evolucionar los volúmenes de generación de PET y recorre cada escena
-        con las flechas.
+        Usa el siguiente control para alternar entre ver todas las secciones de forma continua
+        o navegar de a una sección por vez.
       </p>
+      <button type="button" id="toggle-mode" aria-pressed="false" aria-controls="principal">
+        Mostrar una sección a la vez
+      </button>
     </header>
 
     <main id="principal">
-      <section class="controls" aria-label="Control de proyección temporal">
-        <label for="year-control">Año de referencia</label>
-        <input type="range" id="year-control" name="year" min="2023" max="2035" step="1" value="2023" aria-describedby="year-hint" />
-        <output id="year-value" class="slider-value" aria-live="polite">2023</output>
-        <p id="year-hint" class="visually-hidden">Usa las flechas del teclado o arrastra para cambiar el año.</p>
-      </section>
-
-      <section class="slide" id="slide-global" aria-hidden="false">
+      <section id="titulo-1" tabindex="-1">
         <header>
-          <h2 id="global-title">Generación global de PET</h2>
-          <p>Escenario base con estimaciones históricas y proyección anual.</p>
+          <h2>Carta de Presentacion</h2>
         </header>
-        <figure aria-labelledby="global-title" aria-describedby="global-caption">
-          <div class="bar-chart" role="img" aria-label="Barras que muestran millones de toneladas de PET a nivel global, México y FES Acatlán para el año seleccionado">
-            <div class="bar" aria-label="Global" data-label="Global">
-              <div class="bar-value" id="global-bar" style="height: 40%">76 Mt</div>
-            </div>
-            <div class="bar" aria-label="México" data-label="México">
-              <div class="bar-value" id="mx-bar" style="height: 15%">3.2 Mt</div>
-            </div>
-            <div class="bar" aria-label="FES Acatlán" data-label="FES Acatlán">
-              <div class="bar-value" id="fes-bar" style="height: 5%">0.12 Mt</div>
-            </div>
-          </div>
-          <figcaption id="global-caption" class="chart-caption">
-            Serie base elaborada con estimaciones globales desde 2009; los valores se ajustan con el control de año.
-          </figcaption>
-        </figure>
+        <p>Contenido descriptivo para la sección Titulo 1.</p>
       </section>
 
-      <section class="slide" id="slide-mexico" aria-hidden="true">
+      <section id="titulo-2" tabindex="-1">
         <header>
-          <h2 id="mx-title">Producción en México</h2>
-          <p>Comparativo nacional y referencia porcentual frente al total global.</p>
+          <h2>Titulo</h2>
         </header>
-        <figure aria-labelledby="mx-title" aria-describedby="mx-caption">
-          <div class="bar-chart" role="img" aria-label="Barras que comparan el PET nacional contra el global para el año seleccionado">
-            <div class="bar" aria-label="Global" data-label="Global">
-              <div class="bar-value" id="mx-global-bar" style="height: 40%">76 Mt</div>
-            </div>
-            <div class="bar" aria-label="México" data-label="México">
-              <div class="bar-value" id="mx-specific-bar" style="height: 15%">3.2 Mt</div>
-            </div>
-          </div>
-          <figcaption id="mx-caption" class="chart-caption">
-            El porcentaje nacional respecto al total global se actualiza automáticamente para mantener la escala coherente.
-          </figcaption>
-        </figure>
+        <p>Contenido descriptivo para la sección Titulo 2.</p>
       </section>
 
-      <section class="slide" id="slide-fes" aria-hidden="true">
+      <section id="titulo-3" tabindex="-1">
         <header>
-          <h2 id="fes-title">Producción en FES Acatlán</h2>
-          <p>Contextualiza la generación local dentro del panorama nacional.</p>
+          <h2>Contenido</h2>
         </header>
-        <figure aria-labelledby="fes-title" aria-describedby="fes-caption">
-          <div class="bar-chart" role="img" aria-label="Barras que comparan el PET de FES Acatlán contra México para el año seleccionado">
-            <div class="bar" aria-label="México" data-label="México">
-              <div class="bar-value" id="fes-mx-bar" style="height: 15%">3.2 Mt</div>
-            </div>
-            <div class="bar" aria-label="FES Acatlán" data-label="FES Acatlán">
-              <div class="bar-value" id="fes-specific-bar" style="height: 5%">0.12 Mt</div>
-            </div>
-          </div>
-          <figcaption id="fes-caption" class="chart-caption">
-            El valor local muestra la posible tendencia siguiendo el mismo ritmo de crecimiento observado desde 2009.
-          </figcaption>
-        </figure>
+        <p>Contenido descriptivo para la sección Titulo 3.</p>
       </section>
 
-      <section class="slide" id="slide-referencias" aria-hidden="true">
+      <section id="titulo-4" tabindex="-1">
         <header>
-          <h2 id="ref-title">Referencias y notas</h2>
-          <p>Datos de referencia y recordatorios de supervisión.</p>
+          <h2>Resumen</h2>
         </header>
-        <ul>
-          <li>Estimaciones internacionales compiladas a partir de reportes públicos desde 2009.</li>
-          <li>Proyección simple basada en crecimiento anual de 2.1% global y 1.8% nacional.</li>
-          <li>Valores locales derivados de reportes internos de FES Acatlán con actualización supervisada.</li>
-          <li>El agente de IA puede ajustar la pendiente de crecimiento tras cada punto de control.</li>
-        </ul>
+        <p>Contenido descriptivo para la sección Titulo 4.</p>
       </section>
 
-      <div class="nav-controls" aria-label="Navegación entre diapositivas">
-        <button type="button" id="prev-slide">Anterior</button>
-        <span class="slider-value" id="slide-status" aria-live="polite">Diapositiva 1 de 4</span>
-        <button type="button" id="next-slide">Siguiente</button>
-      </div>
-      <p class="status">Usa Tab + Enter o las flechas del control deslizante para explorar.</p>
+      <section id="titulo-5" tabindex="-1">
+        <header>
+          <h2>Bosquejo</h2>
+        </header>
+        <p>Contenido descriptivo para la sección Titulo 5.</p>
+      </section>
+
+      <section id="titulo-6" tabindex="-1">
+        <header>
+          <h2>Resultados del analisis</h2>
+        </header>
+        <p>Contenido descriptivo para la sección Titulo 6.</p>
+      </section>
+
+      <section id="titulo-7" tabindex="-1">
+        <header>
+          <h2>Alternativas</h2>
+        </header>
+        <p>Contenido descriptivo para la sección Titulo 7.</p>
+      </section>
+
+      <section id="titulo-8" tabindex="-1">
+        <header>
+          <h2>Recomendaciones</h2>
+        </header>
+        <p>Contenido descriptivo para la sección Titulo 8.</p>
+      </section>
+
+      <section id="titulo-9" tabindex="-1">
+        <header>
+          <h2>Resumen</h2>
+        </header>
+        <p>Contenido descriptivo para la sección Titulo 9.</p>
+      </section>
+
+      <section id="titulo-10" tabindex="-1">
+        <header>
+          <h2>Apendice</h2>
+        </header>
+        <p>Contenido descriptivo para la sección Titulo 10.</p>
+      </section>
     </main>
 
+    <nav id="section-navigation" aria-label="Navegación entre secciones">
+      <button type="button" id="previous-section" hidden>Anterior</button>
+      <p id="section-status" role="status" aria-live="polite">Modo continuo activo.</p>
+      <button type="button" id="next-section" hidden>Siguiente</button>
+    </nav>
+
     <footer>
-      <p>Presentación accesible con foco en rendimiento y mínima interacción.</p>
-      <p>Paleta: azules predominantes, acentos verdes y toques dorados sutiles para destacar hallazgos.</p>
+      <p>Ejemplo accesible y semántico de control de modos de visualización de contenido.</p>
     </footer>
 
     <script>
-      const yearControl = document.getElementById('year-control');
-      const yearValue = document.getElementById('year-value');
-      const slides = Array.from(document.querySelectorAll('.slide'));
-      const prevButton = document.getElementById('prev-slide');
-      const nextButton = document.getElementById('next-slide');
-      const slideStatus = document.getElementById('slide-status');
+      const toggleModeButton = document.getElementById('toggle-mode');
+      const sectionNavigation = document.getElementById('section-navigation');
+      const previousButton = document.getElementById('previous-section');
+      const nextButton = document.getElementById('next-section');
+      const sectionStatus = document.getElementById('section-status');
+      const sections = Array.from(document.querySelectorAll('main section'));
+      let singleSectionMode = false;
+      let currentIndex = 0;
 
-      const projections = {
-        years: [2023, 2025, 2027, 2029, 2031, 2033, 2035],
-        global: [76, 80, 83, 86, 90, 94, 98],
-        mexico: [3.2, 3.35, 3.46, 3.58, 3.72, 3.86, 4.0],
-        fes: [0.12, 0.126, 0.131, 0.137, 0.144, 0.151, 0.158],
-      };
-
-      const bars = {
-        global: document.getElementById('global-bar'),
-        mexico: document.getElementById('mx-bar'),
-        fes: document.getElementById('fes-bar'),
-        mexicoDetail: document.getElementById('mx-specific-bar'),
-        globalDetail: document.getElementById('mx-global-bar'),
-        fesDetail: document.getElementById('fes-specific-bar'),
-        fesMexico: document.getElementById('fes-mx-bar'),
-      };
-
-      function getInterpolatedValue(year, values) {
-        const { years } = projections;
-        if (year <= years[0]) return values[0];
-        if (year >= years[years.length - 1]) return values[values.length - 1];
-
-        for (let i = 0; i < years.length - 1; i += 1) {
-          const startYear = years[i];
-          const endYear = years[i + 1];
-          if (year >= startYear && year <= endYear) {
-            const ratio = (year - startYear) / (endYear - startYear);
-            return values[i] + (values[i + 1] - values[i]) * ratio;
-          }
+      function getSectionTitle(index) {
+        const section = sections[index];
+        if (!section) {
+          return '';
         }
-        return values[values.length - 1];
+        const heading = section.querySelector('h2');
+        return heading?.textContent?.trim() ?? '';
       }
 
-      function setBar(element, value, max) {
-        const percentage = Math.min(100, Math.max(12, (value / max) * 100));
-        element.style.height = `${percentage}%`;
-        element.textContent = `${value.toFixed(2)} Mt`.replace('.00', '');
+      function updateNavigationButtons() {
+        const previousIndex = currentIndex - 1;
+        const nextIndex = currentIndex + 1;
+
+        previousButton.disabled = previousIndex < 0;
+        nextButton.disabled = nextIndex >= sections.length;
+
+        previousButton.textContent = previousIndex >= 0
+          ? `Anterior: ${getSectionTitle(previousIndex)}`
+          : 'Anterior';
+
+        nextButton.textContent = nextIndex < sections.length
+          ? `Siguiente: ${getSectionTitle(nextIndex)}`
+          : 'Siguiente';
       }
 
-      function updateCharts(year) {
-        const globalVal = getInterpolatedValue(year, projections.global);
-        const mxVal = getInterpolatedValue(year, projections.mexico);
-        const fesVal = getInterpolatedValue(year, projections.fes);
-
-        const maxGlobalContext = Math.max(globalVal, mxVal * 4); // Keep Mexico legible
-        const maxMexicoContext = Math.max(mxVal, fesVal * 5);
-
-        setBar(bars.global, globalVal, maxGlobalContext);
-        setBar(bars.mexico, mxVal, maxGlobalContext);
-        setBar(bars.fes, fesVal, maxGlobalContext);
-
-        setBar(bars.globalDetail, globalVal, maxGlobalContext);
-        setBar(bars.mexicoDetail, mxVal, maxGlobalContext);
-
-        setBar(bars.fesMexico, mxVal, maxMexicoContext);
-        setBar(bars.fesDetail, fesVal, maxMexicoContext);
-      }
-
-      function updateSlideVisibility(index) {
-        slides.forEach((slide, idx) => {
-          const isActive = idx === index;
-          slide.setAttribute('aria-hidden', String(!isActive));
+      function updateSectionsVisibility() {
+        sections.forEach((section, index) => {
+          const shouldHide = singleSectionMode && index !== currentIndex;
+          section.hidden = shouldHide;
+          if (!shouldHide && singleSectionMode) {
+            section.focus();
+          }
         });
-        slideStatus.textContent = `Diapositiva ${index + 1} de ${slides.length}`;
-        prevButton.disabled = index === 0;
-        nextButton.disabled = index === slides.length - 1;
       }
 
-      let currentSlide = 0;
-      updateSlideVisibility(currentSlide);
-      updateCharts(parseInt(yearControl.value, 10));
+      function updateStatusMessage() {
+        if (singleSectionMode) {
+          const currentSection = sections[currentIndex];
+          const title = currentSection.querySelector('h2');
+          sectionStatus.textContent = `Sección ${currentIndex + 1} de ${sections.length}: ${title?.textContent ?? ''}`;
+        } else {
+          sectionStatus.textContent = 'Modo continuo activo.';
+        }
+      }
 
-      yearControl.addEventListener('input', (event) => {
-        const selectedYear = parseInt(event.target.value, 10);
-        yearValue.textContent = String(selectedYear);
-        updateCharts(selectedYear);
+      function updateToggleButton() {
+        toggleModeButton.textContent = singleSectionMode
+          ? 'Mostrar todas las secciones'
+          : 'Mostrar una sección a la vez';
+        toggleModeButton.setAttribute('aria-pressed', String(singleSectionMode));
+      }
+
+      function refreshView() {
+        updateSectionsVisibility();
+        updateNavigationButtons();
+        updateStatusMessage();
+        previousButton.hidden = !singleSectionMode;
+        nextButton.hidden = !singleSectionMode;
+      }
+
+      toggleModeButton.addEventListener('click', () => {
+        singleSectionMode = !singleSectionMode;
+        if (singleSectionMode) {
+          currentIndex = 0;
+        }
+        updateToggleButton();
+        refreshView();
       });
 
-      prevButton.addEventListener('click', () => {
-        if (currentSlide > 0) {
-          currentSlide -= 1;
-          updateSlideVisibility(currentSlide);
+      previousButton.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex -= 1;
+          refreshView();
         }
       });
 
       nextButton.addEventListener('click', () => {
-        if (currentSlide < slides.length - 1) {
-          currentSlide += 1;
-          updateSlideVisibility(currentSlide);
+        if (currentIndex < sections.length - 1) {
+          currentIndex += 1;
+          refreshView();
         }
       });
+
+      // Inicializar vista en modo continuo
+      refreshView();
     </script>
   </body>
 </html>
