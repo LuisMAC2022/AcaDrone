@@ -3,307 +3,226 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Demostración de modos de secciones</title>
-    <style>
-      :root {
-        color-scheme: light dark;
-        font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-        line-height: 1.6;
-      }
-
-      body {
-        margin: 0;
-        padding: 0 1.5rem 2rem;
-        background-color: Canvas;
-        color: CanvasText;
-      }
-
-      .skip-link {
-        position: absolute;
-        top: 0.5rem;
-        left: 0.5rem;
-        padding: 0.5rem 0.75rem;
-        background-color: Highlight;
-        color: HighlightText;
-        border-radius: 0.25rem;
-        transform: translateY(-150%);
-        transition: transform 0.2s ease-in-out;
-      }
-
-      .skip-link:focus {
-        transform: translateY(0);
-      }
-
-      header,
-      main,
-      nav,
-      footer {
-        max-width: 70ch;
-        margin: 0 auto;
-      }
-
-      header {
-        padding: 2rem 0 1.5rem;
-      }
-
-      header > p {
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-      }
-
-      button {
-        font: inherit;
-        padding: 0.5rem 0.75rem;
-        border: 1px solid currentColor;
-        border-radius: 0.4rem;
-        background-color: transparent;
-        cursor: pointer;
-      }
-
-      button:focus-visible {
-        outline: 0.25rem solid Highlight;
-        outline-offset: 0.1rem;
-      }
-
-      main {
-        display: grid;
-        gap: 1.75rem;
-      }
-
-      section {
-        border: 1px solid currentColor;
-        border-radius: 0.75rem;
-        padding: 1.5rem;
-      }
-
-      section:focus {
-        outline: none;
-        box-shadow: 0 0 0 0.25rem rgba(0, 102, 204, 0.35);
-      }
-
-      section > header {
-        margin-bottom: 0.75rem;
-      }
-
-      #section-navigation {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        justify-content: space-between;
-        padding-top: 0.5rem;
-      }
-
-      #section-status {
-        flex: 1;
-        text-align: center;
-      }
-
-      footer {
-        padding-top: 2rem;
-        font-size: 0.9rem;
-      }
-
-      @media (max-width: 42rem) {
-        body {
-          padding-inline: 1rem;
-        }
-
-        section {
-          padding: 1rem;
-        }
-      }
-    </style>
+    <title>Presentación interactiva: PET global y local</title>
+    <link rel="stylesheet" href="styles/presentation.css" />
   </head>
   <body>
-    <a class="skip-link" href="#principal">Saltar al contenido principal</a>
-    <header>
-      <h1>Visualización de secciones con doble modo</h1>
-      <p>
-        Usa el siguiente control para alternar entre ver todas las secciones de forma continua
-        o navegar de a una sección por vez.
-      </p>
-      <button type="button" id="toggle-mode" aria-pressed="false" aria-controls="principal">
-        Mostrar una sección a la vez
-      </button>
-    </header>
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+    <div class="wrapper">
+      <header class="hero">
+        <span class="hero__eyebrow" aria-hidden="true">Panorama PET</span>
+        <h1 class="hero__title">Generación y proyección de PET: del mundo a FES Acatlán</h1>
+        <p class="hero__lede">
+          Presentación concisa y accesible con foco en datos visuales. Usa el control de tiempo para
+          explorar la evolución y las proyecciones sin perder claridad.
+        </p>
+      </header>
 
-    <main id="principal">
-      <section id="titulo-1" tabindex="-1">
-        <header>
-          <h2>Carta de Presentacion</h2>
-        </header>
-        <p>Contenido descriptivo para la sección Titulo 1.</p>
-      </section>
+      <main id="contenido">
+        <section class="controls" aria-label="Control temporal de proyecciones">
+          <div class="input-row">
+            <label for="year">Selecciona el año</label>
+            <input
+              type="range"
+              id="year"
+              name="year"
+              min="2009"
+              max="2035"
+              step="1"
+              value="2024"
+              aria-describedby="year-help"
+            />
+            <output id="year-value" for="year">2024</output>
+          </div>
+          <p id="year-help" class="help-text">
+            Desliza para observar las proyecciones a lo largo del tiempo. Valores basados en estimaciones
+            desde 2009 con horizonte 2035.
+          </p>
+        </section>
 
-      <section id="titulo-2" tabindex="-1">
-        <header>
-          <h2>Titulo</h2>
-        </header>
-        <p>Contenido descriptivo para la sección Titulo 2.</p>
-      </section>
+        <section class="slides" aria-label="Diapositivas de visualización" aria-live="polite">
+          <article class="slide" data-slide="0" aria-current="true">
+            <h2>Generación global de PET</h2>
+            <p>Producción anual estimada y proyección a 2035 (millones de toneladas).</p>
+            <figure class="figure">
+              <div class="figure__value">
+                <span id="global-value" aria-live="polite">--</span>
+                <span class="timeline">2009 — 2035</span>
+              </div>
+              <div class="bar" aria-hidden="true"><span id="global-bar"></span></div>
+              <div class="figure__meta">
+                <span id="global-growth">Crecimiento vs 2009: --</span>
+                <span>Fuente: estimaciones globales de plásticos (línea PET)</span>
+              </div>
+            </figure>
+          </article>
 
-      <section id="titulo-3" tabindex="-1">
-        <header>
-          <h2>Contenido</h2>
-        </header>
-        <p>Contenido descriptivo para la sección Titulo 3.</p>
-      </section>
+          <article class="slide" data-slide="1" aria-current="false">
+            <h2>Producción nacional (México)</h2>
+            <p>Volumen anual estimado y proyección (millones de toneladas).</p>
+            <figure class="figure">
+              <div class="figure__value">
+                <span id="mx-value" aria-live="polite">--</span>
+                <span class="timeline">2009 — 2035</span>
+              </div>
+              <div class="bar" aria-hidden="true"><span id="mx-bar"></span></div>
+              <div class="figure__meta">
+                <span id="mx-share">Participación regional: --</span>
+                <span>Dato base 2009 y proyección lineal con ajustes conservadores</span>
+              </div>
+            </figure>
+          </article>
 
-      <section id="titulo-4" tabindex="-1">
-        <header>
-          <h2>Resumen</h2>
-        </header>
-        <p>Contenido descriptivo para la sección Titulo 4.</p>
-      </section>
+          <article class="slide" data-slide="2" aria-current="false">
+            <h2>FES Acatlán: generación estimada</h2>
+            <p>Toneladas anuales generadas y recuperadas en campus.</p>
+            <figure class="figure">
+              <div class="figure__value">
+                <span id="campus-value" aria-live="polite">--</span>
+                <span class="timeline">2009 — 2035</span>
+              </div>
+              <div class="bar" aria-hidden="true"><span id="campus-bar"></span></div>
+              <div class="figure__meta">
+                <span id="campus-recovery">Recuperación estimada: --</span>
+                <span id="campus-trend">Tendencia vs 2024: --</span>
+              </div>
+            </figure>
+          </article>
+        </section>
 
-      <section id="titulo-5" tabindex="-1">
-        <header>
-          <h2>Bosquejo</h2>
-        </header>
-        <p>Contenido descriptivo para la sección Titulo 5.</p>
-      </section>
+        <nav class="navigation" aria-label="Navegación de diapositivas">
+          <button type="button" id="prev" aria-label="Diapositiva anterior">Anterior</button>
+          <p class="status" id="slide-status">Diapositiva 1 de 3: Panorama global</p>
+          <button type="button" id="next" aria-label="Diapositiva siguiente">Siguiente</button>
+        </nav>
 
-      <section id="titulo-6" tabindex="-1">
-        <header>
-          <h2>Resultados del analisis</h2>
-        </header>
-        <p>Contenido descriptivo para la sección Titulo 6.</p>
-      </section>
-
-      <section id="titulo-7" tabindex="-1">
-        <header>
-          <h2>Alternativas</h2>
-        </header>
-        <p>Contenido descriptivo para la sección Titulo 7.</p>
-      </section>
-
-      <section id="titulo-8" tabindex="-1">
-        <header>
-          <h2>Recomendaciones</h2>
-        </header>
-        <p>Contenido descriptivo para la sección Titulo 8.</p>
-      </section>
-
-      <section id="titulo-9" tabindex="-1">
-        <header>
-          <h2>Resumen</h2>
-        </header>
-        <p>Contenido descriptivo para la sección Titulo 9.</p>
-      </section>
-
-      <section id="titulo-10" tabindex="-1">
-        <header>
-          <h2>Apendice</h2>
-        </header>
-        <p>Contenido descriptivo para la sección Titulo 10.</p>
-      </section>
-    </main>
-
-    <nav id="section-navigation" aria-label="Navegación entre secciones">
-      <button type="button" id="previous-section" hidden>Anterior</button>
-      <p id="section-status" role="status" aria-live="polite">Modo continuo activo.</p>
-      <button type="button" id="next-section" hidden>Siguiente</button>
-    </nav>
-
-    <footer>
-      <p>Ejemplo accesible y semántico de control de modos de visualización de contenido.</p>
-    </footer>
+        <section class="references" aria-labelledby="refs-title">
+          <h2 id="refs-title">Referencias</h2>
+          <ul>
+            <li>Series estimadas 2009–2024 con proyección lineal a 2035 basada en reportes globales de PET.</li>
+            <li>Datos locales sintetizados para México y FES Acatlán con supuestos conservadores.</li>
+            <li>Interfaz pensada para supervisión y ajustes del agente conforme se disponga de nuevas fuentes.</li>
+          </ul>
+        </section>
+      </main>
+    </div>
 
     <script>
-      const toggleModeButton = document.getElementById('toggle-mode');
-      const sectionNavigation = document.getElementById('section-navigation');
-      const previousButton = document.getElementById('previous-section');
-      const nextButton = document.getElementById('next-section');
-      const sectionStatus = document.getElementById('section-status');
-      const sections = Array.from(document.querySelectorAll('main section'));
-      let singleSectionMode = false;
-      let currentIndex = 0;
+      const dataByYear = {
+        2009: { global: 22.4, mexico: 1.8, campus: 0.012, recovery: 0.32 },
+        2012: { global: 24.6, mexico: 2.0, campus: 0.014, recovery: 0.34 },
+        2016: { global: 29.3, mexico: 2.5, campus: 0.017, recovery: 0.36 },
+        2020: { global: 34.1, mexico: 2.9, campus: 0.020, recovery: 0.38 },
+        2024: { global: 38.5, mexico: 3.3, campus: 0.022, recovery: 0.41 },
+        2028: { global: 43.7, mexico: 3.6, campus: 0.025, recovery: 0.45 },
+        2032: { global: 47.8, mexico: 3.9, campus: 0.027, recovery: 0.48 },
+        2035: { global: 50.2, mexico: 4.1, campus: 0.028, recovery: 0.5 }
+      };
 
-      function getSectionTitle(index) {
-        const section = sections[index];
-        if (!section) {
-          return '';
-        }
-        const heading = section.querySelector('h2');
-        return heading?.textContent?.trim() ?? '';
+      const yearInput = document.getElementById('year');
+      const yearValue = document.getElementById('year-value');
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const slideStatus = document.getElementById('slide-status');
+      const prevBtn = document.getElementById('prev');
+      const nextBtn = document.getElementById('next');
+
+      const globalValue = document.getElementById('global-value');
+      const globalBar = document.getElementById('global-bar');
+      const globalGrowth = document.getElementById('global-growth');
+
+      const mxValue = document.getElementById('mx-value');
+      const mxBar = document.getElementById('mx-bar');
+      const mxShare = document.getElementById('mx-share');
+
+      const campusValue = document.getElementById('campus-value');
+      const campusBar = document.getElementById('campus-bar');
+      const campusRecovery = document.getElementById('campus-recovery');
+      const campusTrend = document.getElementById('campus-trend');
+
+      const maxGlobal = 50.2;
+      const maxMexico = 4.1;
+      const maxCampus = 0.028;
+      const baseYear = 2009;
+      const comparisonYear = 2024;
+
+      function formatMillions(value) {
+        return `${value.toFixed(1)} Mt`; // millones de toneladas
       }
 
-      function updateNavigationButtons() {
-        const previousIndex = currentIndex - 1;
-        const nextIndex = currentIndex + 1;
-
-        previousButton.disabled = previousIndex < 0;
-        nextButton.disabled = nextIndex >= sections.length;
-
-        previousButton.textContent = previousIndex >= 0
-          ? `Anterior: ${getSectionTitle(previousIndex)}`
-          : 'Anterior';
-
-        nextButton.textContent = nextIndex < sections.length
-          ? `Siguiente: ${getSectionTitle(nextIndex)}`
-          : 'Siguiente';
+      function formatCampus(value) {
+        return `${(value * 1000).toFixed(1)} t`; // convertir a toneladas
       }
 
-      function updateSectionsVisibility() {
-        sections.forEach((section, index) => {
-          const shouldHide = singleSectionMode && index !== currentIndex;
-          section.hidden = shouldHide;
-          if (!shouldHide && singleSectionMode) {
-            section.focus();
-          }
+      function percentChange(current, baseline) {
+        return ((current - baseline) / baseline) * 100;
+      }
+
+      function updateBars(year) {
+        const entry = dataByYear[year];
+        const base = dataByYear[baseYear];
+        const current = dataByYear[comparisonYear];
+
+        if (!entry || !base || !current) return;
+
+        yearValue.textContent = year;
+
+        globalValue.textContent = formatMillions(entry.global);
+        globalBar.style.setProperty('--value', `${(entry.global / maxGlobal) * 100}%`);
+        const globalChange = percentChange(entry.global, base.global);
+        globalGrowth.textContent = `Crecimiento vs 2009: ${globalChange.toFixed(0)}%`;
+
+        mxValue.textContent = formatMillions(entry.mexico);
+        mxBar.style.setProperty('--value', `${(entry.mexico / maxMexico) * 100}%`);
+        const share = (entry.mexico / entry.global) * 100;
+        mxShare.textContent = `Participación regional: ${share.toFixed(1)}% del total`;
+
+        campusValue.textContent = formatCampus(entry.campus);
+        campusBar.style.setProperty('--value', `${(entry.campus / maxCampus) * 100}%`);
+        const recovered = entry.campus * entry.recovery;
+        campusRecovery.textContent = `Recuperación estimada: ${(recovered * 1000).toFixed(1)} t (${(entry.recovery * 100).toFixed(0)}%)`;
+        const campusDelta = percentChange(entry.campus, current.campus);
+        campusTrend.textContent = `Tendencia vs 2024: ${campusDelta >= 0 ? '+' : ''}${campusDelta.toFixed(1)}%`;
+      }
+
+      function setSlide(index) {
+        slides.forEach((slide, i) => {
+          const isActive = i === index;
+          slide.setAttribute('aria-current', String(isActive));
+          slide.hidden = !isActive;
         });
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === slides.length - 1;
+        slideStatus.textContent = `Diapositiva ${index + 1} de ${slides.length}: ${slides[index].querySelector('h2').textContent}`;
       }
 
-      function updateStatusMessage() {
-        if (singleSectionMode) {
-          const currentSection = sections[currentIndex];
-          const title = currentSection.querySelector('h2');
-          sectionStatus.textContent = `Sección ${currentIndex + 1} de ${sections.length}: ${title?.textContent ?? ''}`;
-        } else {
-          sectionStatus.textContent = 'Modo continuo activo.';
-        }
-      }
-
-      function updateToggleButton() {
-        toggleModeButton.textContent = singleSectionMode
-          ? 'Mostrar todas las secciones'
-          : 'Mostrar una sección a la vez';
-        toggleModeButton.setAttribute('aria-pressed', String(singleSectionMode));
-      }
-
-      function refreshView() {
-        updateSectionsVisibility();
-        updateNavigationButtons();
-        updateStatusMessage();
-        previousButton.hidden = !singleSectionMode;
-        nextButton.hidden = !singleSectionMode;
-      }
-
-      toggleModeButton.addEventListener('click', () => {
-        singleSectionMode = !singleSectionMode;
-        if (singleSectionMode) {
-          currentIndex = 0;
-        }
-        updateToggleButton();
-        refreshView();
+      yearInput.addEventListener('input', (event) => {
+        const year = Number(event.target.value);
+        const closestYear = Object.keys(dataByYear)
+          .map(Number)
+          .reduce((prev, curr) => (Math.abs(curr - year) < Math.abs(prev - year) ? curr : prev));
+        yearInput.value = closestYear;
+        updateBars(closestYear);
       });
 
-      previousButton.addEventListener('click', () => {
-        if (currentIndex > 0) {
-          currentIndex -= 1;
-          refreshView();
+      prevBtn.addEventListener('click', () => {
+        const currentIndex = slides.findIndex((slide) => slide.getAttribute('aria-current') === 'true');
+        if (currentIndex > 0) setSlide(currentIndex - 1);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        const currentIndex = slides.findIndex((slide) => slide.getAttribute('aria-current') === 'true');
+        if (currentIndex < slides.length - 1) setSlide(currentIndex + 1);
+      });
+
+      // Inicialización
+      slides.forEach((slide, index) => {
+        if (index !== 0) {
+          slide.hidden = true;
         }
       });
 
-      nextButton.addEventListener('click', () => {
-        if (currentIndex < sections.length - 1) {
-          currentIndex += 1;
-          refreshView();
-        }
-      });
-
-      // Inicializar vista en modo continuo
-      refreshView();
+      updateBars(Number(yearInput.value));
+      setSlide(0);
     </script>
   </body>
 </html>
